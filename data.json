@@ -1,0 +1,333 @@
+{
+  "owner": "오유빈",
+  "updated": "2026-11-18",
+  "items": [
+    {
+      "id": "leo-taupe",
+      "category": "leotard",
+      "shape": "camisole",
+      "brand": "보우낸져",
+      "name": "보우낸져 토프 캐미솔",
+      "short": "토프 캐미솔",
+      "color": "#B5A18F",
+      "colorName": "토프",
+      "family": "neutral",
+      "value": 63,
+      "note": "어깨선이 가볍게 드러나는 기본 캐미솔"
+    },
+    {
+      "id": "leo-mocha",
+      "category": "leotard",
+      "shape": "boatneck",
+      "brand": "보우낸져",
+      "name": "보우낸져 모카 보트넥",
+      "short": "모카 보트넥",
+      "color": "#A3826E",
+      "colorName": "모카",
+      "family": "neutral",
+      "value": 52,
+      "note": "보트넥이 쇄골과 어깨선을 정돈해 주는 레오타드"
+    },
+    {
+      "id": "leo-pink",
+      "category": "leotard",
+      "shape": "camisole",
+      "brand": "미뇽발레",
+      "name": "미뇽발레 컬러핏 핑크",
+      "short": "핑크 컬러핏",
+      "color": "#E4A0AA",
+      "colorName": "로즈핑크",
+      "family": "pink",
+      "value": 70,
+      "note": "얼굴빛을 밝혀 주는 컬러핏 핑크"
+    },
+    {
+      "id": "leo-black",
+      "category": "leotard",
+      "shape": "camisole",
+      "brand": "웨어무아",
+      "name": "웨어무아 블랙 캐미솔",
+      "short": "블랙 캐미솔",
+      "color": "#302C2E",
+      "colorName": "블랙",
+      "family": "black",
+      "value": 15,
+      "note": "허리와 다리 라인을 또렷하게 잡아 주는 블랙"
+    },
+    {
+      "id": "top-pink-warmer",
+      "category": "top",
+      "shape": "long-sleeve",
+      "brand": "데비웨어",
+      "name": "데비웨어 핑크 긴팔워머",
+      "short": "핑크 긴팔워머",
+      "color": "#E7AFB9",
+      "colorName": "로즈핑크",
+      "family": "pink",
+      "value": 74,
+      "note": "팔 전체를 감싸는 부드러운 핑크 워머"
+    },
+    {
+      "id": "top-dacquoise",
+      "category": "top",
+      "shape": "bolero-short",
+      "brand": "보우낸져",
+      "name": "보우낸져 다쿠아즈 베이지",
+      "short": "다쿠아즈 베이지",
+      "color": "#E7DAC9",
+      "colorName": "베이지",
+      "family": "neutral",
+      "value": 84,
+      "note": "어깨만 가볍게 덮는 베이지 숏 슬리브"
+    },
+    {
+      "id": "top-charcoal",
+      "category": "top",
+      "shape": "long-sleeve",
+      "brand": "보우낸져",
+      "name": "보우낸져 슬림긴팔워머 차콜",
+      "short": "차콜 슬림워머",
+      "color": "#4B484B",
+      "colorName": "차콜",
+      "family": "neutral",
+      "value": 31,
+      "note": "팔 라인을 슬림하게 잡아 주는 차콜 워머"
+    },
+    {
+      "id": "top-mesh",
+      "category": "top",
+      "shape": "mesh-crop",
+      "brand": "미뇽발레",
+      "name": "미뇽발레 화이트 크롭 메쉬상의",
+      "short": "화이트 메쉬크롭",
+      "color": "#FBF7F3",
+      "colorName": "화이트",
+      "family": "white",
+      "value": 96,
+      "note": "레오타드 위에 얹는 화이트 메쉬 크롭"
+    },
+    {
+      "id": "bot-oatmeal",
+      "category": "bottom",
+      "shape": "skirt-long",
+      "brand": "마쥬에",
+      "name": "마쥬에 오트밀2 13인치 스커트",
+      "short": "오트밀 스커트",
+      "color": "#DCC7AB",
+      "colorName": "오트밀",
+      "family": "neutral",
+      "value": 79,
+      "note": "골반부터 부드럽게 떨어지는 13인치 스커트"
+    },
+    {
+      "id": "bot-pink-skirt",
+      "category": "bottom",
+      "shape": "skirt-short",
+      "brand": "미뇽발레",
+      "name": "미뇽발레 핑크 스커트",
+      "short": "핑크 스커트",
+      "color": "#E8B3B9",
+      "colorName": "핑크",
+      "family": "pink",
+      "value": 74,
+      "note": "짧게 흔들리는 핑크 스커트"
+    },
+    {
+      "id": "bot-knit-shorts",
+      "category": "bottom",
+      "shape": "shorts-knit",
+      "brand": "데비웨어",
+      "name": "데비웨어 옆리본 니트쇼츠 그레이",
+      "short": "그레이 니트쇼츠",
+      "color": "#A8A4A5",
+      "colorName": "그레이",
+      "family": "neutral",
+      "value": 65,
+      "note": "옆 리본이 포인트인 그레이 니트 쇼츠"
+    },
+    {
+      "id": "bot-sweat",
+      "category": "bottom",
+      "shape": "shorts-loose",
+      "brand": "보우낸져",
+      "name": "보우낸져 반바지땀복 베이지",
+      "short": "베이지 반바지",
+      "color": "#D9C6AF",
+      "colorName": "베이지",
+      "family": "neutral",
+      "value": 77,
+      "note": "수업 전후 편하게 입는 베이지 땀복 반바지"
+    },
+    {
+      "id": "ankle-beige",
+      "category": "ankle",
+      "shape": "ankle",
+      "brand": "",
+      "name": "베이지 앵클워머",
+      "short": "베이지",
+      "color": "#DCC9B2",
+      "colorName": "베이지",
+      "family": "neutral",
+      "value": 78,
+      "note": "발목을 따뜻하게 감싸는 베이지 앵클워머"
+    },
+    {
+      "id": "ankle-muted",
+      "category": "ankle",
+      "shape": "ankle",
+      "brand": "",
+      "name": "톤다운 뮤트핑크 앵클워머",
+      "short": "뮤트핑크",
+      "color": "#C79AA1",
+      "colorName": "뮤트핑크",
+      "family": "pink",
+      "value": 66,
+      "note": "톤을 낮춘 뮤트핑크 앵클워머"
+    }
+  ],
+  "presets": [
+    {
+      "id": "cream-tone",
+      "name": "크림 톤온톤",
+      "tag": "수업 기본",
+      "desc": "토프와 오트밀을 겹친 가장 차분한 조합. 다쿠아즈 베이지가 어깨를 부드럽게 덮어 줘요.",
+      "combo": {
+        "leotard": "leo-taupe",
+        "top": "top-dacquoise",
+        "bottom": "bot-oatmeal",
+        "ankle": "ankle-beige"
+      }
+    },
+    {
+      "id": "mocha-classic",
+      "name": "모카 클래식",
+      "tag": "단정한 라인",
+      "desc": "모카 보트넥에 차콜 슬림 워머. 팔 라인이 길어 보이고 스커트와 톤이 자연스럽게 이어져요.",
+      "combo": {
+        "leotard": "leo-mocha",
+        "top": "top-charcoal",
+        "bottom": "bot-oatmeal",
+        "ankle": "ankle-beige"
+      }
+    },
+    {
+      "id": "black-rose",
+      "name": "블랙 & 로즈",
+      "tag": "포인트 컬러",
+      "desc": "블랙 레오타드에 핑크 스커트 하나만 얹은 조합. 뮤트핑크 앵클워머로 발끝까지 이어 줘요.",
+      "combo": {
+        "leotard": "leo-black",
+        "top": null,
+        "bottom": "bot-pink-skirt",
+        "ankle": "ankle-muted"
+      }
+    },
+    {
+      "id": "pink-ballerina",
+      "name": "핑크 발레리나",
+      "tag": "사진 찍기 좋은 날",
+      "desc": "핑크 컬러핏 위에 화이트 메쉬 크롭을 레이어드. 핑크 스커트로 발레리나 분위기를 살렸어요.",
+      "combo": {
+        "leotard": "leo-pink",
+        "top": "top-mesh",
+        "bottom": "bot-pink-skirt",
+        "ankle": "ankle-beige"
+      }
+    },
+    {
+      "id": "charcoal-modern",
+      "name": "차콜 모던",
+      "tag": "군살 커버",
+      "desc": "토프 캐미솔에 차콜 워머와 그레이 니트쇼츠. 어두운 상의가 상체를 정리해 줘요.",
+      "combo": {
+        "leotard": "leo-taupe",
+        "top": "top-charcoal",
+        "bottom": "bot-knit-shorts",
+        "ankle": "ankle-beige"
+      }
+    },
+    {
+      "id": "cozy-class",
+      "name": "코지 수업",
+      "tag": "편한 날",
+      "desc": "모카 보트넥에 베이지 땀복 반바지. 스트레칭 많은 수업이나 이동이 많은 날에 좋아요.",
+      "combo": {
+        "leotard": "leo-mocha",
+        "top": null,
+        "bottom": "bot-sweat",
+        "ankle": "ankle-beige"
+      }
+    }
+  ],
+  "shapes": {
+    "leotard": [
+      {
+        "id": "camisole",
+        "label": "캐미솔"
+      },
+      {
+        "id": "boatneck",
+        "label": "보트넥"
+      }
+    ],
+    "top": [
+      {
+        "id": "long-sleeve",
+        "label": "긴팔 워머"
+      },
+      {
+        "id": "bolero-short",
+        "label": "숏 슬리브"
+      },
+      {
+        "id": "mesh-crop",
+        "label": "메쉬 크롭"
+      }
+    ],
+    "bottom": [
+      {
+        "id": "skirt-long",
+        "label": "롱 스커트"
+      },
+      {
+        "id": "skirt-short",
+        "label": "숏 스커트"
+      },
+      {
+        "id": "shorts-knit",
+        "label": "니트 쇼츠"
+      },
+      {
+        "id": "shorts-loose",
+        "label": "반바지 땀복"
+      }
+    ],
+    "ankle": [
+      {
+        "id": "ankle",
+        "label": "앵클워머"
+      }
+    ]
+  },
+  "copy": {
+    "harmony": {
+      "blackRose": "블랙과 로즈를 맞춘 또렷한 대비가 매력적인 조합이에요.",
+      "pinkLayered": "핑크를 두 겹으로 겹친 부드러운 발레리나 톤이에요.",
+      "mono": "블랙을 중심으로 톤을 낮춘 모던한 조합이에요.",
+      "neutral": "뉴트럴 톤을 겹쳐 만든 차분한 크림빛 조합이에요.",
+      "rosePoint": "차분한 뉴트럴에 로즈 컬러 하나만 포인트로 얹었어요.",
+      "daily": "무난하게 어디에나 어울리는 데일리 조합이에요."
+    },
+    "clause": {
+      "camisole": "캐미솔 라인이 어깨를 가볍게 드러내요.",
+      "boatneck": "보트넥이 쇄골선을 단정하게 정돈해요.",
+      "long-sleeve": "긴팔 워머가 팔 라인을 부드럽게 감싸 줘요.",
+      "bolero-short": "숏 슬리브가 어깨를 가볍게 덮어요.",
+      "mesh-crop": "크롭 메쉬가 레이어드 포인트가 돼요.",
+      "skirt-long": "13인치 스커트가 골반부터 자연스럽게 떨어져요.",
+      "skirt-short": "짧은 스커트로 다리 라인이 살아나요.",
+      "shorts-knit": "니트 쇼츠가 힙 라인을 잡아 줘요.",
+      "shorts-loose": "땀복 반바지라 편하게 움직일 수 있어요."
+    }
+  }
+}

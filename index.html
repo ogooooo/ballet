@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#FAF3EE" />
+<meta name="description" content="유빈님의 발레복으로 코디를 조합하고, 추천을 받고, 착용 기록을 남기는 발레 코디북" />
+<title>유빈님의 발레 코디북</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='88'>🩰</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Noto+Serif+KR:wght@500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="app">
+
+  <header class="masthead">
+    <p class="eyebrow">Ballet Wardrobe</p>
+    <h1>유빈님의 발레 코디북</h1>
+    <p class="sub" id="mastheadSub">보유한 발레복으로 오늘의 코디를 골라 보세요</p>
+  </header>
+
+  <main>
+    <!-- ───── 코디 조합기 ───── -->
+    <section class="panel is-active" id="panel-compose" data-panel="compose">
+      <div class="card stage">
+        <div class="stage-figure" id="stageFigure"><!-- svg --></div>
+        <div class="stage-head">
+          <div class="score" id="stageScore">궁합 90</div>
+          <div class="stage-title">
+            <p class="stage-kicker" id="stageKicker">오늘의 코디</p>
+            <h2 id="stageTitle">뉴트럴 톤온톤</h2>
+          </div>
+        </div>
+        <p class="stage-comment" id="stageComment"></p>
+        <ul class="stage-items" id="stageItems"></ul>
+      </div>
+
+      <button class="btn btn-primary btn-draw" id="btnDraw">
+        <span class="draw-icon" aria-hidden="true">✦</span>
+        <span id="btnDrawLabel">오늘의 추천 코디 뽑기</span>
+      </button>
+
+      <div class="pickers" id="pickers"></div>
+
+      <div class="stage-actions">
+        <button class="btn btn-soft" id="btnSave">♡ 이 코디 저장</button>
+        <button class="btn btn-soft" id="btnWear">✓ 오늘 입었어요</button>
+      </div>
+    </section>
+
+    <!-- ───── 룩북 ───── -->
+    <section class="panel" id="panel-lookbook" data-panel="lookbook">
+      <div class="section-head">
+        <h2>베스트 룩북</h2>
+        <p>잘 어울리는 조합을 골라 두었어요. 카드를 누르면 조합기로 불러와요.</p>
+      </div>
+      <div class="lookbook" id="lookbook"></div>
+    </section>
+
+    <!-- ───── 옷장 ───── -->
+    <section class="panel" id="panel-closet" data-panel="closet">
+      <div class="section-head">
+        <h2>내 옷장</h2>
+        <p id="closetSummary">보유 아이템 14개</p>
+      </div>
+      <div id="closetList"></div>
+      <button class="btn btn-outline btn-add" id="btnAddToggle">+ 새 발레복 추가</button>
+      <form class="card add-form" id="addForm" hidden>
+        <div class="field">
+          <label for="addCategory">종류</label>
+          <select id="addCategory">
+            <option value="leotard">레오타드</option>
+            <option value="top">상의·워머</option>
+            <option value="bottom">하의</option>
+            <option value="ankle">앵클워머</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="addShape">실루엣</label>
+          <select id="addShape"></select>
+        </div>
+        <div class="field">
+          <label for="addName">이름</label>
+          <input type="text" id="addName" placeholder="예: 보우낸져 로즈 캐미솔" maxlength="40" />
+        </div>
+        <div class="field">
+          <label for="addBrand">브랜드 (선택)</label>
+          <input type="text" id="addBrand" placeholder="예: 보우낸져" maxlength="20" />
+        </div>
+        <div class="field">
+          <label for="addColor">색상</label>
+          <div class="color-row">
+            <input type="color" id="addColor" value="#C79AA1" />
+            <div class="swatches" id="colorSwatches"></div>
+          </div>
+        </div>
+        <div class="field">
+          <label for="addColorName">색상 이름 (선택)</label>
+          <input type="text" id="addColorName" placeholder="예: 로즈" maxlength="16" />
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn btn-ghost" id="btnAddCancel">취소</button>
+          <button type="submit" class="btn btn-primary">옷장에 추가</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- ───── 기록 ───── -->
+    <section class="panel" id="panel-log" data-panel="log">
+      <div class="section-head">
+        <h2>코디 기록</h2>
+        <p id="logSummary">저장한 코디와 착용 기록을 모아 둘게요.</p>
+      </div>
+
+      <h3 class="sub-head">즐겨찾는 코디 <span id="favCount" class="count">0</span></h3>
+      <div class="fav-list" id="favList"></div>
+
+      <h3 class="sub-head">착용 기록 <span id="wearCount" class="count">0</span></h3>
+      <div class="wear-list" id="wearList"></div>
+    </section>
+  </main>
+
+  <nav class="tabbar" aria-label="주요 화면">
+    <button class="tab is-active" data-tab="compose"><span class="tab-ico">◇</span>코디</button>
+    <button class="tab" data-tab="lookbook"><span class="tab-ico">❋</span>룩북</button>
+    <button class="tab" data-tab="closet"><span class="tab-ico">❍</span>옷장</button>
+    <button class="tab" data-tab="log"><span class="tab-ico">❖</span>기록</button>
+  </nav>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
