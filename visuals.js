@@ -58,12 +58,12 @@ const uid = (p) => (p || 'v') + (++_uid).toString(36);
    viewBox 0 0 240 470
    ========================================================= */
 const FIG = {
-  skin: '#F0D4C6',
+  skin: '#EDCBBC',
   skinShade: '#D6A997',
   skinHi: '#FBE8DC',
-  tight: '#F3D3CA',
+  tight: '#EFCBC1',
   tightShade: '#D3ACA2',
-  tightHi: '#FDEEE9',
+  tightHi: '#FCEDE7',
   hair: '#3A2E2F',
   hairHi: '#5B4842',
   shoe: '#E9C6BE',
@@ -142,6 +142,7 @@ function figureArt(c) {
   /* ── 다리 (타이즈) ── */
   push(`<path d="${P.legL}" fill="url(#${k}-tight)"/>`);
   push(`<path d="${P.legR}" fill="url(#${k}-tight)"/>`);
+  push(`<g fill="none" stroke="#8A6357" stroke-opacity=".16" stroke-width="1"><path d="${P.legL}"/><path d="${P.legR}"/></g>`);
   push(`<g opacity=".5" filter="url(#${k}-blur2)">
       <path d="M113.4,180 C113.8,214 114,250 113.6,286 C113.4,318 113,352 112.6,388 L112.6,400 L108,400 C108.6,352 109.2,318 109.6,286 C110,250 110,214 110,180 Z" fill="${FIG.tightShade}"/>
       <path d="M126.6,180 C126.2,214 126,250 126.4,286 C126.6,318 127,352 127.4,388 L127.4,400 L132,400 C131.4,352 130.8,318 130.4,286 C130,250 130,214 130,180 Z" fill="${FIG.tightShade}"/>
@@ -203,6 +204,7 @@ function figureArt(c) {
   /* ── 몸통 피부 ── */
   push(`<path d="M114.6,82 C117,85.4 123,85.4 125.4,82 L125.4,88 C122,90.4 118,90.4 114.6,88 Z" fill="${FIG.skinShade}" opacity=".22" filter="url(#${k}-blur2)"/>`);
   push(`<path d="${P.torso}" fill="url(#${k}-skin)"/>`);
+  push(`<path d="${P.torso}" fill="none" stroke="#8A6357" stroke-opacity=".15" stroke-width="1"/>`);
 
   /* 쇄골 · 가슴 · 허리 명암 */
   push(`<g fill="none" stroke="${FIG.skinShade}" stroke-linecap="round" opacity=".4">
