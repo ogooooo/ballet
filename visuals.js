@@ -643,13 +643,14 @@ function boardArt(p) {
   /* ── 카드 ── */
   const hasTop = !!top, hasBot = !!bot, hasAnk = !!ank;
 
-  const A = hasBot ? { x: 26, y: 44, w: 148, h: 176, rot: -3.0 } : { x: 36, y: 46, w: 152, h: 190, rot: -2.6 };
-  const B = { x: 180, y: 34, w: 118, h: 132, rot: 6.4 };
-  const C = { x: 98, y: 210, w: 164, h: 140, rot: -1.6 };
-  const D = hasBot ? { x: 20, y: 264, w: 78, h: 94, rot: 5.6 } : { x: 184, y: 268, w: 82, h: 98, rot: -5.0 };
+  const A = hasBot ? { x: 26, y: 42, w: 144, h: 168, rot: -3.0 } : { x: 34, y: 44, w: 150, h: 184, rot: -2.6 };
+  const B = { x: 180, y: 32, w: 112, h: 126, rot: 6.4 };
+  const C = { x: 96, y: 198, w: 158, h: 134, rot: -1.6 };
+  const D = hasBot ? { x: 20, y: 248, w: 74, h: 90, rot: 5.6 } : { x: 182, y: 252, w: 78, h: 94, rot: -5.0 };
 
   const layer = [];
   if (hasTop) layer.push({ z: 1, el: cardFrame(B.x, B.y, B.w, B.h, B.rot, (w, h) => topCardInner(top, w, h, k), { caption: capFor(top, 'TOP'), frame: 'polaroid' }) });
+  else layer.push({ z: 1, el: cardFrame(B.x, B.y, B.w, B.h * 0.82, B.rot, (w, h) => swatchCardInner(palette, w, h, k), { caption: 'COLOR STUDY', frame: 'polaroid' }) });
   layer.push({ z: 2, el: cardFrame(A.x, A.y, A.w, A.h, A.rot, (w, h) => leoCardInner(leo, w, h, k), { caption: capFor(leo, 'LEOTARD'), frame: 'print' }) });
   if (hasBot) layer.push({ z: 3, el: cardFrame(C.x, C.y, C.w, C.h, C.rot, (w, h) => botCardInner(bot, w, h, k), { caption: capFor(bot, 'BOTTOM'), frame: 'print' }) });
   if (hasAnk) layer.push({ z: 4, el: cardFrame(D.x, D.y, D.w, D.h, D.rot, (w, h) => ankCardInner(ank, w, h, k), { caption: capFor(ank, 'ANKLE'), frame: 'polaroid' }) });
@@ -675,12 +676,12 @@ function boardArt(p) {
   const title = p.title || '오늘의 코디';
   const sub = fit((p.items || chosen.map((i) => i.short || i.name).join(' · ')), 38);
   const date = p.date || '';
-  const baseY = 376;
+  const baseY = 352;
   push(`<path d="M20,${baseY} L${W - 20},${baseY}" stroke="#AC8B77" stroke-opacity=".3" stroke-width=".6"/>`);
   push(`<text x="20" y="${baseY + 12}" font-family="'Cormorant Garamond', serif" font-size="5.6" letter-spacing="2" fill="#B08F80">TODAY'S LOOK</text>`);
-  push(`<text x="20" y="${baseY + 31}" font-family="'Noto Serif KR', 'Cormorant Garamond', serif" font-size="15.5" letter-spacing=".1" fill="#453630">${esc(title)}</text>`);
-  push(`<text x="20" y="${baseY + 44}" font-family="'Noto Serif KR', sans-serif" font-size="6.2" letter-spacing=".1" fill="#97826F">${esc(sub)}</text>`);
-  if (date) push(`<text x="20" y="${baseY + 56}" font-family="'Cormorant Garamond', serif" font-size="5.6" letter-spacing="1.2" fill="#B49A8B">${esc(date)}</text>`);
+  push(`<text x="20" y="${baseY + 32}" font-family="'Noto Serif KR', 'Cormorant Garamond', serif" font-size="16" letter-spacing=".1" fill="#453630">${esc(title)}</text>`);
+  push(`<text x="20" y="${baseY + 46}" font-family="'Noto Serif KR', sans-serif" font-size="6.4" letter-spacing=".1" fill="#97826F">${esc(sub)}</text>`);
+  if (date) push(`<text x="20" y="${baseY + 59}" font-family="'Cormorant Garamond', serif" font-size="5.8" letter-spacing="1.2" fill="#B49A8B">${esc(date)}</text>`);
 
   /* ── 컬러 팔레트 ── */
   const swY = baseY + 14;
@@ -744,6 +745,26 @@ function boardArt(p) {
   return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="선택한 발레복을 매거진 화보처럼 담은 스타일링 보드" preserveAspectRatio="xMidYMid meet">${defs}${L.join('')}</svg>`;
 }
 
+function swatchCardInner(palette, w, h, k) {
+  const n = Math.max(palette.length, 1);
+  const cols = palette.length ? palette : ['#E7D9CB'];
+  const r = Math.min(w, h * 1.1) * 0.14;
+  const gap = Math.min(w / (n + 1), r * 2.4);
+  const startX = w / 2 - ((n - 1) * gap) / 2;
+  const cy = h * 0.44;
+  let out = `<rect x="0" y="0" width="${w}" height="${h}" fill="${mix(cols[0], '#FBF3E8', 0.9)}"/>
+    <rect x="0" y="0" width="${w}" height="${h}" fill="url(#b-cardGrain)"/>`;
+  cols.forEach((c, i) => {
+    const cx = startX + i * gap;
+    out += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${c}" stroke="#6E5344" stroke-opacity=".18" stroke-width=".7"/>
+      <circle cx="${cx - r * 0.3}" cy="${cy - r * 0.32}" r="${r * 0.36}" fill="#fff" opacity=".22"/>`;
+  });
+  out += `<path d="M${w * 0.18},${h * 0.78} L${w * 0.82},${h * 0.78}" stroke="#8C7263" stroke-opacity=".28" stroke-width=".7"/>
+    <text x="${w / 2}" y="${h * 0.9}" text-anchor="middle" font-family="'Cormorant Garamond', serif" font-size="5.4" letter-spacing="1.6" fill="#9A8578">TONE ON TONE</text>
+    <rect x="0.35" y="0.35" width="${w - 0.7}" height="${h - 0.7}" rx="1.2" fill="none" stroke="#6E5344" stroke-opacity=".14" stroke-width=".6"/>`;
+  return out;
+}
+
 function capFor(item, cat) {
   if (!item) return '';
   return esc(fit(`${cat} · ${item.short || item.name}`, 24).toUpperCase());
@@ -766,8 +787,8 @@ const FLAT = {
 
 function flatPaths(shape) {
   const cami = {
-    body: 'M40,32 C44,40 56,40 60,32 C64,33 68,36 69,41 C71,49 70,55 68,59 C70,67 71,73 70,78 C69,85 62,89 56,87 C52,85 51,87 50,89 C49,87 48,85 44,87 C38,89 31,85 30,78 C29,73 30,67 32,59 C30,55 29,49 31,41 C32,36 36,33 40,32 Z',
-    extra: '<g stroke="C" stroke-width="4.4" stroke-linecap="round" fill="none"><path d="M39,33 L36,12"/><path d="M61,33 L64,12"/></g>'
+    body: 'M38,30 C44,38 56,38 62,30 C66,32 69,37 70,43 C71,51 70,57 68,61 C70,68 71,74 70,78 C70,88 60,93 50,93 C40,93 30,88 30,78 C29,74 30,68 32,61 C30,57 29,51 30,43 C31,37 34,32 38,30 Z',
+    extra: '<g stroke="C" stroke-width="4.2" stroke-linecap="round" fill="none"><path d="M37,31 L34,12"/><path d="M63,31 L66,12"/></g>'
   };
   switch (shape) {
     case 'camisole':
@@ -895,7 +916,7 @@ function garmentDetail(item, cat, k) {
            </g>` : ''}
     </g>
     ${shape === 'camisole'
-      ? `<path d="M40,33 C44,41 56,41 60,33" fill="none" stroke="${L}" stroke-opacity=".5" stroke-width="1.8"/>`
+      ? `<path d="M38,31 C44,39 56,39 62,31" fill="none" stroke="${L}" stroke-opacity=".5" stroke-width="1.8"/>`
       : shape === 'boatneck'
         ? `<path d="M35,27 C42,34 58,34 65,27" fill="none" stroke="${L}" stroke-opacity=".5" stroke-width="2"/>`
         : ''}
