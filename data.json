@@ -13,7 +13,9 @@
       "colorName": "토프",
       "family": "neutral",
       "value": 63,
-      "note": "어깨선이 가볍게 드러나는 기본 캐미솔"
+      "note": "어깨선이 가볍게 드러나는 기본 캐미솔",
+      "image": "assets/leo-taupe.jpg",
+      "imageSrc": "https://bonanza-ballet.com/product/detail.html?product_no=188"
     },
     {
       "id": "leo-mocha",
@@ -59,13 +61,15 @@
       "category": "top",
       "shape": "slim-tee",
       "brand": "데비웨어",
-      "name": "데비웨어 핑크 슬림핏티",
-      "short": "핑크 슬림핏티",
-      "color": "#E7AFB9",
-      "colorName": "로즈핑크",
+      "name": "데비웨어 뉴웨이브 홀릭크롭 긴팔티",
+      "short": "핑크 홀릭크롭티",
+      "color": "#C2A2A8",
+      "colorName": "애쉬핑크",
       "family": "pink",
       "value": 74,
-      "note": "상체와 팔을 슬림하게 감싸 주는 핑크 긴팔 티"
+      "note": "물결 밑단·소매가 포인트인 애쉬핑크 크롭 긴팔 티 (DEVI-T0047)",
+      "image": "assets/top-pink-warmer.jpg",
+      "imageSrc": "https://devi-wear.com/product/detail.html?product_no=3068"
     },
     {
       "id": "top-dacquoise",
@@ -78,7 +82,9 @@
       "colorName": "베이지",
       "family": "neutral",
       "value": 84,
-      "note": "어깨만 가볍게 덮는 베이지 숏 슬리브"
+      "note": "어깨만 가볍게 덮는 베이지 숏 슬리브",
+      "image": "assets/top-dacquoise.jpg",
+      "imageSrc": "https://bonanza-ballet.com/product/detail.html?product_no=169"
     },
     {
       "id": "top-charcoal",
@@ -143,7 +149,9 @@
       "colorName": "그레이",
       "family": "neutral",
       "value": 65,
-      "note": "옆 리본이 포인트인 그레이 니트 쇼츠"
+      "note": "옆 리본이 포인트인 그레이 니트 쇼츠",
+      "image": "assets/bot-knit-shorts.jpg",
+      "imageSrc": "https://devi-wear.com/product/search.html?keyword=DEVI-B0061"
     },
     {
       "id": "bot-sweat",

@@ -440,7 +440,7 @@ body {
   flex-wrap: wrap;
   gap: 4px;
 }
-.lookcard-items span {
+.lookcard-items > span {
   font-size: 10px;
   color: var(--muted);
   background: #F7EFE9;
@@ -704,3 +704,51 @@ input[type="color"] {
   .stage-figure { height: 350px; }
   .lookcard { width: 260px; }
 }
+
+/* ── 아이템 썸네일 (제품 사진 · 플랫레이) ── */
+.thumb {
+  position: relative;
+  flex: none;
+  display: inline-block;
+  overflow: hidden;
+  border-radius: 9px;
+  background: #F7EFE9;
+  box-shadow: inset 0 0 0 1px rgba(60, 45, 45, .10);
+}
+.thumb .thumb-flat { display: block; width: 100%; height: 100%; }
+.thumb .thumb-flat svg { display: block; width: 100%; height: 100%; }
+.thumb img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  z-index: 1;
+}
+.thumb-chip { width: 27px; height: 27px; border-radius: 8px; margin-left: -3px; }
+.thumb-sm { width: 42px; height: 42px; border-radius: 11px; }
+.thumb-md { width: 54px; height: 54px; border-radius: 13px; }
+.chip.is-active .thumb { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .5); }
+
+.chip { padding: 6px 13px 6px 7px; }
+.chip.chip-none { padding: 9px 13px; }
+
+.stage-items .item-text { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.stage-items .item-name { font-size: 12.5px; }
+.stage-items .item-meta {
+  font-size: 10px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lookcard-items > .lookcard-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 8px 2px 2px;
+}
+
+.fav-items .fav-thumbs { display: flex; gap: 5px; margin: 4px 0 2px; }

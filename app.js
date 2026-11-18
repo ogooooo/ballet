@@ -287,8 +287,8 @@ function figureSvg(combo, opts = {}) {
           <path d="M95,110 C 91,132 88,156 85,178"/><path d="M145,110 C 149,132 152,156 155,178"/>
         </g>`);
     } else if (top.shape === 'slim-tee') {
-      /* 슬림핏 티: 소매를 먼저 깔고 몸판을 그 위에 덮어 어깨-소매가 한 조각처럼 이어진다 */
-      const teeBody = 'M110,78 C 103,82 100,87 98,94 C 99,120 99,146 100,167 Q120,173 140,167 C 141,146 141,120 142,94 C 140,87 137,82 130,78 Q120,104 110,78 Z';
+      /* 슬림핏 크롭티: 소매를 먼저 깔고 몸판을 덮어 어깨-소매가 한 조각처럼 이어지고, 밑단은 물결 마감 */
+      const teeBody = 'M110,78 C 103,82 100,87 98,94 C 99,114 99,132 100,146 q5,6 10,0 q5,6 10,0 q5,6 10,0 q5,6 10,0 C 141,132 141,114 142,94 C 140,87 137,82 130,78 Q120,104 110,78 Z';
       const teeLine = shade(topColor, -20);
       layers.push(`<g stroke="${topColor}" stroke-width="13" stroke-linecap="round" fill="none">
           <path d="M103,96 C 94,117 88,141 84,161 C 82,173 80,184 79,194"/>
@@ -297,22 +297,21 @@ function figureSvg(combo, opts = {}) {
       layers.push(`<clipPath id="${k}-tee"><path d="${teeBody}"/></clipPath>`);
       layers.push(`<path d="${teeBody}" fill="${topColor}"/>`);
       layers.push(`<g clip-path="url(#${k}-tee)">
-          <rect x="92" y="74" width="56" height="104" fill="url(#${k}-shade)"/>
-          <path d="M107,96 C 106,124 106,150 108,172" stroke="#fff" stroke-opacity=".13" stroke-width="6" stroke-linecap="round" fill="none"/>
-          <path d="M133,96 C 134,124 134,150 132,172" stroke="${teeLine}" stroke-opacity=".16" stroke-width="6" stroke-linecap="round" fill="none"/>
-          <path d="M118,100 C 117,126 117,152 119,172" stroke="#fff" stroke-opacity=".08" stroke-width="2.4" stroke-linecap="round" fill="none"/>
-          <path d="M104,118 Q103,142 104,166" stroke="${teeLine}" stroke-opacity=".16" stroke-width="1" fill="none"/>
-          <path d="M136,118 Q137,142 136,166" stroke="${teeLine}" stroke-opacity=".16" stroke-width="1" fill="none"/>
+          <rect x="92" y="74" width="56" height="84" fill="url(#${k}-shade)"/>
+          <path d="M107,96 C 106,118 106,136 108,150" stroke="#fff" stroke-opacity=".13" stroke-width="6" stroke-linecap="round" fill="none"/>
+          <path d="M133,96 C 134,118 134,136 132,150" stroke="${teeLine}" stroke-opacity=".16" stroke-width="6" stroke-linecap="round" fill="none"/>
+          <path d="M118,100 C 117,120 117,138 119,150" stroke="#fff" stroke-opacity=".08" stroke-width="2.4" stroke-linecap="round" fill="none"/>
         </g>`);
       /* 넥라인 리브 */
       layers.push(`<path d="M130,78 Q120,104 110,78" fill="none" stroke="${teeLine}" stroke-opacity=".5" stroke-width="2.1" stroke-linecap="round"/>`);
-      layers.push(`<path d="M128,80 Q120,101 112,80" fill="none" stroke="${shade(topColor, 14)}" stroke-opacity=".45" stroke-width=".9"/>`);
-      /* 밑단 */
-      layers.push(`<path d="M100,166 Q120,172 140,166" fill="none" stroke="${teeLine}" stroke-opacity=".35" stroke-width="1.2"/>`);
-      layers.push(`<path d="${teeBody}" fill="none" stroke="${teeLine}" stroke-opacity=".28" stroke-width="1"/>`);
-      /* 소매 커프스 · 주름 */
-      layers.push(`<g stroke="${teeLine}" stroke-width="1.3" opacity=".45" fill="none">
-          <path d="M73.5,187 Q78,192 83.5,190"/><path d="M166.5,187 Q162,192 156.5,190"/>
+      layers.push(`<path d="M128,81 Q120,100 112,81" fill="none" stroke="${shade(topColor, 14)}" stroke-opacity=".45" stroke-width=".9"/>`);
+      /* 물결 밑단 */
+      layers.push(`<path d="M100,146 q5,6 10,0 q5,6 10,0 q5,6 10,0 q5,6 10,0" fill="none" stroke="${topColor}" stroke-width="3.4" stroke-linecap="round"/>`);
+      layers.push(`<path d="M101,144 q4.6,5 9.2,0 q4.6,5 9.2,0 q4.6,5 9.2,0 q4.6,5 9.2,0" fill="none" stroke="${teeLine}" stroke-opacity=".3" stroke-width=".9"/>`);
+      layers.push(`<path d="${teeBody}" fill="none" stroke="${teeLine}" stroke-opacity=".26" stroke-width="1"/>`);
+      /* 물결 소매 끝 · 주름 */
+      layers.push(`<g stroke="${shade(topColor, -14)}" stroke-width="1.6" opacity=".45" fill="none" stroke-linecap="round">
+          <path d="M72,190 q2.4,4.4 4.8,1 q2.4,4.4 4.8,1"/><path d="M167,190 q-2.4,4.4 -4.8,1 q-2.4,4.4 -4.8,1"/>
         </g>`);
       layers.push(`<g stroke="${shade(topColor, 16)}" stroke-width=".9" opacity=".4" fill="none">
           <path d="M96,110 C 92,132 89,154 86,174"/><path d="M144,110 C 148,132 151,154 154,174"/>
@@ -395,6 +394,81 @@ function figureSvg(combo, opts = {}) {
     </defs>`;
 
   return `<svg viewBox="0 0 240 470" role="img" aria-label="선택한 발레복을 입은 일러스트" preserveAspectRatio="xMidYMid meet">${defs}${layers.join('')}</svg>`;
+}
+
+/* ---------------- 아이템 카드 (제품 사진 · 플랫레이) ---------------- */
+function garmentSvg(item) {
+  const c = item.color || '#D9C9BE';
+  const line = shade(c, -24);
+  const open = `<svg viewBox="0 0 64 64" role="img" aria-label="${esc(item.name || '아이템')}" preserveAspectRatio="xMidYMid meet">`;
+  const g = (inner) => `${open}<g fill="${c}" stroke="${line}" stroke-width="1.1" stroke-linejoin="round">${inner}</g></svg>`;
+  const rib = (x, y, w, n, gap) => {
+    let s = '';
+    for (let i = 1; i <= n; i++) s += `<path d="M${x},${y + i * gap} h${w}"/>`;
+    return `<g fill="none" stroke="${line}" stroke-opacity=".45" stroke-width=".8">${s}</g>`;
+  };
+  switch (item.shape) {
+    case 'camisole':
+      return g(`<path d="M23,15 C24,11 40,11 41,15 C42,26 42,36 41,42 C39,52 35,57 32,57 C29,57 25,52 23,42 C22,36 22,26 23,15 Z"/>
+        <path d="M24.5,14 L27,7" fill="none" stroke="${line}" stroke-width="1.9" stroke-linecap="round"/>
+        <path d="M39.5,14 L37,7" fill="none" stroke="${line}" stroke-width="1.9" stroke-linecap="round"/>
+        <path d="M24,31 Q32,35 40,31" fill="none" stroke="${line}" stroke-opacity=".4" stroke-width=".9"/>`);
+    case 'boatneck':
+      return g(`<path d="M18,14 C26,18 38,18 46,14 C46,26 45,36 44,43 C41,53 37,57 32,57 C27,57 23,53 20,43 C19,36 18,26 18,14 Z"/>
+        <path d="M18,14 C26,18 38,18 46,14" fill="none" stroke="${line}" stroke-width="1.3"/>
+        <path d="M20,32 Q32,36 44,32" fill="none" stroke="${line}" stroke-opacity=".4" stroke-width=".9"/>`);
+    case 'slim-tee':
+      return g(`<path d="M23,16 C17,23 14,33 12,44" fill="none" stroke="${c}" stroke-width="5.4" stroke-linecap="round"/>
+        <path d="M41,16 C47,23 50,33 52,44" fill="none" stroke="${c}" stroke-width="5.4" stroke-linecap="round"/>
+        <path d="M22,13 C26,10 38,10 42,13 C43,22 43,30 42,38 C36,41 28,41 22,38 C21,30 21,22 22,13 Z"/>
+        <path d="M26,11.5 Q32,17 38,11.5" fill="none" stroke="${line}" stroke-width="1.3"/>
+        <path d="M22,38 q2.5,3.4 5,0 q2.5,3.4 5,0 q2.5,3.4 5,0 q2.5,3.4 5,0" fill="none" stroke="${line}" stroke-width="1.1"/>`);
+    case 'long-sleeve':
+      return g(`<path d="M25,15 C19,24 16,34 14,45" fill="none" stroke="${c}" stroke-width="5.6" stroke-linecap="round"/>
+        <path d="M39,15 C45,24 48,34 50,45" fill="none" stroke="${c}" stroke-width="5.6" stroke-linecap="round"/>
+        <path d="M25,15 Q32,20 39,15" fill="none" stroke="${c}" stroke-width="4.2" stroke-linecap="round"/>
+        <path d="M25,15 Q32,20 39,15" fill="none" stroke="${line}" stroke-opacity=".45" stroke-width=".9"/>`);
+    case 'bolero-short':
+      return g(`<path d="M24,14 C21,19 19,24 18,29" fill="none" stroke="${c}" stroke-width="5.4" stroke-linecap="round"/>
+        <path d="M40,14 C43,19 45,24 46,29" fill="none" stroke="${c}" stroke-width="5.4" stroke-linecap="round"/>
+        <path d="M24,14 Q32,19 40,14" fill="none" stroke="${c}" stroke-width="4" stroke-linecap="round"/>
+        <path d="M24,14 Q32,19 40,14" fill="none" stroke="${line}" stroke-opacity=".45" stroke-width=".9"/>`);
+    case 'mesh-crop':
+      return g(`<path d="M23,16 Q32,20 41,16 C42,26 41,32 40,37 Q32,40 24,37 C23,32 22,26 23,16 Z" fill-opacity=".85"/>
+        <g fill="#fff" fill-opacity=".55">
+          <circle cx="27" cy="22" r=".9"/><circle cx="32" cy="21" r=".9"/><circle cx="37" cy="22" r=".9"/>
+          <circle cx="29" cy="28" r=".9"/><circle cx="35" cy="28" r=".9"/><circle cx="32" cy="33" r=".9"/>
+        </g>`);
+    case 'skirt-long':
+      return g(`<path d="M22,17 L42,17 L54,52 Q32,57 10,52 Z"/>
+        <path d="M22,17 L42,17 L42,22 L22,22 Z" fill-opacity=".85"/>
+        <path d="M32,23 L32,55" fill="none" stroke="${line}" stroke-opacity=".3" stroke-width=".9"/>`);
+    case 'skirt-short':
+      return g(`<path d="M20,18 L44,18 L52,40 Q32,44 12,40 Z"/>
+        <path d="M20,18 L44,18 L44,23 L20,23 Z" fill-opacity=".85"/>`);
+    case 'shorts-knit':
+      return g(`<path d="M20,16 L44,16 L43,50 L34,50 L32,31 L30,50 L21,50 Z"/>
+        <path d="M20,16 L44,16 L44,21 L20,21 Z" fill-opacity=".85"/>`);
+    case 'shorts-loose':
+      return g(`<path d="M18,15 L46,15 L45,49 L35,49 L32,29 L29,49 L19,49 Z"/>
+        <path d="M18,15 L46,15 L46,21 L18,21 Z" fill-opacity=".85"/>
+        <path d="M30,17 q2,3 4,0" fill="none" stroke="${line}" stroke-width="1"/>`);
+    case 'ankle':
+      return g(`<rect x="12" y="17" width="17" height="30" rx="8"/>
+        <rect x="35" y="17" width="17" height="30" rx="8"/>
+        ${rib(13, 24, 15, 3, 5)}${rib(36, 24, 15, 3, 5)}`);
+    default:
+      return g(`<path d="M20,18 L44,18 L44,46 L20,46 Z"/>`);
+  }
+}
+
+function itemThumb(item, size = 'thumb-sm') {
+  if (!item) return '';
+  const flat = `<span class="thumb-flat" aria-hidden="true">${garmentSvg(item)}</span>`;
+  const img = item.image
+    ? `<img src="${esc(item.image)}" alt="${esc(item.name || '')}" loading="lazy" onerror="this.remove()"${item.imageSrc ? ` title="제품 사진 · ${esc(item.imageSrc)}"` : ''}>`
+    : '';
+  return `<span class="thumb ${size}${item.image ? ' has-photo' : ''}">${flat}${img}</span>`;
 }
 
 /* ---------------- 궁합 점수 ---------------- */
@@ -548,8 +622,11 @@ function renderStage(combo, ghost = false) {
   const chosen = CATS.map((c) => ({ cat: c, item: byId(combo[c.key]) })).filter((x) => x.item);
   $('#stageItems').innerHTML = chosen.map(({ cat, item }) => `
     <li>
-      <span class="dot" style="--c:${esc(item.color)}"></span>
-      <span class="item-name">${esc(item.short || item.name)}</span>
+      ${itemThumb(item, 'thumb-sm')}
+      <span class="item-text">
+        <span class="item-name">${esc(item.short || item.name)}</span>
+        <span class="item-meta">${esc(item.brand || '브랜드 미기록')}${item.colorName ? ` · ${esc(item.colorName)}` : ''}</span>
+      </span>
       <span class="item-cat">${esc(cat.label)}</span>
     </li>`).join('');
 }
@@ -567,7 +644,7 @@ function renderPickers() {
     list.forEach((item) => {
       const active = state.combo[cat.key] === item.id;
       chips.push(`<button class="chip ${active ? 'is-active' : ''}" data-cat="${cat.key}" data-id="${esc(item.id)}" title="${esc(item.name)}">
-          <span class="dot" style="--c:${esc(item.color)}"></span>${esc(item.short || item.name)}</button>`);
+          ${itemThumb(item, 'thumb-chip')}${esc(item.short || item.name)}</button>`);
     });
     return `<div class="picker">
         <div class="picker-head">
@@ -583,7 +660,7 @@ function renderLookbook() {
   const wrap = $('#lookbook');
   wrap.innerHTML = state.presets.map((p) => {
     const score = scoreCombo(p.combo);
-    const shorts = comboItems(p.combo).map((i) => i.short || i.name);
+    const shorts = comboItems(p.combo).map((i) => `<span class="lookcard-item">${itemThumb(i, 'thumb-chip')}${esc(i.short || i.name)}</span>`);
     return `<article class="lookcard" data-preset="${esc(p.id)}">
         <div class="lookcard-figure">${figureSvg(p.combo)}</div>
         <div class="lookcard-body">
@@ -593,7 +670,7 @@ function renderLookbook() {
           </div>
           <p class="lookcard-tag">${esc(p.tag || '')}</p>
           <p class="lookcard-desc">${esc(p.desc || '')}</p>
-          <p class="lookcard-items">${shorts.map((s) => `<span>${esc(s)}</span>`).join('')}</p>
+          <p class="lookcard-items">${shorts.join('')}</p>
           <button class="btn btn-soft btn-load" data-load="${esc(p.id)}">이 코디 입어보기</button>
         </div>
       </article>`;
@@ -609,7 +686,7 @@ function renderCloset() {
         <ul class="closet-rows">
           ${items.map((item) => `
             <li class="closet-row" data-item="${esc(item.id)}">
-              <span class="dot dot-lg" style="--c:${esc(item.color)}"></span>
+              ${itemThumb(item, 'thumb-md')}
               <div class="closet-text">
                 <p class="closet-name">${esc(item.name)}</p>
                 <p class="closet-meta">${esc(item.brand || '브랜드 미기록')} · ${esc(item.note || '')}</p>
