@@ -688,7 +688,7 @@ function boardArt(p) {
   if (date) push(`<text x="20" y="${baseY + 59}" font-family="'Cormorant Garamond', serif" font-size="5.8" letter-spacing="1.2" fill="#B49A8B">${esc(date)}</text>`);
 
   /* ── 컬러 팔레트 ── */
-  const swY = baseY + 14;
+  const swY = baseY + 30;
   palette.forEach((col, i) => {
     const cx = W - 24 - i * 15.5;
     push(`<g transform="rotate(${i % 2 ? 3 : -2} ${cx} ${swY})">
@@ -696,7 +696,7 @@ function boardArt(p) {
         <rect x="${cx - 5.6}" y="${swY - 6.4}" width="11.2" height="2.6" fill="#000" opacity=".08"/>
       </g>`);
   });
-  push(`<text x="${W - 20}" y="${swY + 17}" text-anchor="end" font-family="'Cormorant Garamond', serif" font-size="5.2" letter-spacing="1.6" fill="#B1988A">COLOR PALETTE${p.score ? ' · HARMONY ' + esc(String(p.score)) : ''}</text>`);
+  push(`<text x="${W - 20}" y="${swY + 15}" text-anchor="end" font-family="'Cormorant Garamond', serif" font-size="5.2" letter-spacing="1.6" fill="#B1988A">COLOR PALETTE${p.score ? ' · HARMONY ' + esc(String(p.score)) : ''}</text>`);
 
   const defs = `<defs>
     <linearGradient id="b-paper" x1="0" y1="0" x2="0.55" y2="1">
