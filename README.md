@@ -23,6 +23,12 @@ https://ogooooo.github.io/ballet/
 | `style.css` | 디자인 (뉴트럴 · 로즈 · 크림 팔레트, 모바일 퍼스트) |
 | `app.js` | 조합기 · 궁합 점수 · 추천 · SVG 일러스트 · localStorage 기록 |
 | `data.json` | 보유 아이템 14개와 룩북 프리셋 6종 |
+| `manifest.json` · `apple-touch-icon.png` · `icon-192.png` · `icon-512.png` | 홈 화면에 추가할 때 쓰는 앱 아이콘과 설정 |
+
+## 아이폰에서 앱처럼 쓰기
+
+사파리에서 <https://ogooooo.github.io/ballet/> 를 연 뒤 **공유 → 홈 화면에 추가**를 누르면
+발레 코디북 아이콘이 생기고, 주소창 없이 앱처럼 열립니다.
 
 ## 데이터 수정
 
