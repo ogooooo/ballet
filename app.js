@@ -290,9 +290,9 @@ function figureSvg(combo, opts = {}) {
       /* 슬림핏 크롭티: 소매를 먼저 깔고 몸판을 덮어 어깨-소매가 한 조각처럼 이어지고, 밑단은 물결 마감 */
       const teeBody = 'M110,78 C 103,82 100,87 98,94 C 99,114 99,132 100,146 q5,6 10,0 q5,6 10,0 q5,6 10,0 q5,6 10,0 C 141,132 141,114 142,94 C 140,87 137,82 130,78 Q120,104 110,78 Z';
       const teeLine = shade(topColor, -20);
-      layers.push(`<g stroke="${topColor}" stroke-width="13" stroke-linecap="round" fill="none">
-          <path d="M103,96 C 94,117 88,141 84,161 C 82,173 80,184 79,194"/>
-          <path d="M137,96 C 146,117 152,141 156,161 C 158,173 160,184 161,194"/>
+      layers.push(`<g stroke="${topColor}" stroke-width="12.5" stroke-linecap="round" fill="none">
+          <path d="M103.5,96.5 C 94.5,117 88.5,141 84.5,161 C 82.5,173 80.5,184 79.5,194"/>
+          <path d="M136.5,96.5 C 145.5,117 151.5,141 155.5,161 C 157.5,173 159.5,184 160.5,194"/>
         </g>`);
       layers.push(`<clipPath id="${k}-tee"><path d="${teeBody}"/></clipPath>`);
       layers.push(`<path d="${teeBody}" fill="${topColor}"/>`);
