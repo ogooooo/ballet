@@ -565,7 +565,7 @@ function cardFrame(x, y, w, h, rot, inner, opts) {
     <rect x="0" y="0" width="${w}" height="${h}" rx="${rx}" fill="${kind === 'polaroid' ? '#FFFDF9' : '#FFFCF6'}" filter="url(#b-card)"/>
     <rect x="0.5" y="0.5" width="${w - 1}" height="${h - 1}" rx="${rx}" fill="none" stroke="#D9C4B2" stroke-opacity=".55" stroke-width=".7"/>
     <g transform="translate(${pad} ${pad})">${inner(iw, ih)}</g>
-    ${caption ? `<text x="${w / 2}" y="${h - 4.6}" text-anchor="middle" font-family="'Cormorant Garamond', serif" font-size="${kind === 'polaroid' ? 6.4 : 6.2}" letter-spacing=".8" fill="#9C8477">${caption}</text>` : ''}
+    ${caption ? `<text x="${w / 2}" y="${h - 4.6}" text-anchor="middle" font-family="'Cormorant Garamond', serif" font-size="${kind === 'polaroid' ? 6.8 : 6.6}" letter-spacing=".7" fill="#9C8477">${caption}</text>` : ''}
   </g>`;
 }
 
@@ -576,7 +576,7 @@ function photoInner(item, iw, ih, k) {
     <g clip-path="url(#${clip})">
       <image href="${esc(item.image)}" x="0" y="0" width="${iw}" height="${ih}" preserveAspectRatio="xMidYMid slice" filter="url(#b-tone)"/>
       <rect x="0" y="0" width="${iw}" height="${ih}" fill="url(#b-photoShade)"/>
-      <rect x="0" y="0" width="${iw}" height="${ih}" fill="#F6E7DA" opacity=".06"/>
+      <rect x="0" y="0" width="${iw}" height="${ih}" fill="#F6E7DA" opacity=".035"/>
     </g>
     <rect x="0.35" y="0.35" width="${iw - 0.7}" height="${ih - 0.7}" rx="1.2" fill="none" stroke="#6E5344" stroke-opacity=".16" stroke-width=".6"/>`;
 }
@@ -602,13 +602,16 @@ function ankCardInner(item, w, h, k) {
 /* 사진 없는 아이템: 원단 질감이 살아 있는 디테일 일러스트 카드 */
 function detailCard(item, w, h, k, cat) {
   const c = item ? item.color : '#D9C9BE';
-  const shape = item ? item.shape : 'camisole';
   const S = Math.min(w, h);
-  const tx = w / 2, ty = h / 2;
-  const scale = S / 100;
-  return `<rect x="0" y="0" width="${w}" height="${h}" fill="${mix(c, '#FBF3E8', 0.88)}"/>
+  const tx = w / 2, ty = h * 0.48;
+  const scale = (S / 100) * 1.12;
+  return `<rect x="0" y="0" width="${w}" height="${h}" fill="${mix(c, '#FCF5EC', 0.9)}"/>
     <rect x="0" y="0" width="${w}" height="${h}" fill="url(#b-cardGrain)"/>
     <g transform="translate(${tx} ${ty}) scale(${scale}) translate(-50 -50)">${garmentDetail(item, cat, k)}</g>
+    <rect x="0" y="0" width="${w}" height="${h}" fill="url(#b-sweep)"/>
+    <g transform="translate(${w - 4} ${h - 4}) rotate(-90)" opacity=".55">
+      <text x="0" y="0" text-anchor="start" font-family="'Cormorant Garamond', serif" font-size="4.6" letter-spacing="1.1" fill="#8C7263">FABRIC STUDY</text>
+    </g>
     <rect x="0.35" y="0.35" width="${w - 0.7}" height="${h - 0.7}" rx="1.2" fill="none" stroke="#6E5344" stroke-opacity=".14" stroke-width=".6"/>`;
 }
 
@@ -627,23 +630,23 @@ function boardArt(p) {
 
   /* ── 배경: 크림 종이 + 스튜디오 조명 ── */
   push(`<rect width="${W}" height="${H}" fill="url(#b-paper)"/>`);
-  push(`<ellipse cx="150" cy="88" rx="156" ry="126" fill="url(#b-light)"/>`);
-  push(`<rect x="0" y="0" width="${W}" height="${H}" fill="url(#b-grain)" opacity=".5"/>`);
-  push(`<rect x="8.5" y="8.5" width="${W - 17}" height="${H - 17}" fill="none" stroke="#B0907C" stroke-opacity=".16" stroke-width=".7"/>`);
+  push(`<ellipse cx="140" cy="80" rx="170" ry="130" fill="url(#b-light)"/>`);
+  push(`<rect x="0" y="0" width="${W}" height="${H}" fill="url(#b-grain)" opacity=".55"/>`);
+  push(`<rect x="8" y="8" width="${W - 16}" height="${H - 16}" fill="none" stroke="#AC8B77" stroke-opacity=".18" stroke-width=".7"/>`);
   push(`<rect x="0" y="0" width="${W}" height="${H}" fill="url(#b-vignette)"/>`);
 
   /* ── 머리글 ── */
-  push(`<text x="21" y="25.5" font-family="'Cormorant Garamond', serif" font-size="6.2" letter-spacing="2.3" fill="#A8877A">BALLET WARDROBE</text>`);
-  push(`<text x="${W - 21}" y="25.5" text-anchor="end" font-family="'Cormorant Garamond', serif" font-size="6.2" letter-spacing="1.4" fill="#A8877A">${esc(p.issue || 'STYLING BOARD')}</text>`);
-  push(`<path d="M21,31 L${W - 21},31" stroke="#B0907C" stroke-opacity=".32" stroke-width=".55"/>`);
+  push(`<text x="20" y="26" font-family="'Cormorant Garamond', serif" font-size="7" letter-spacing="2.6" fill="#A2816F">BALLET WARDROBE</text>`);
+  push(`<text x="${W - 20}" y="26" text-anchor="end" font-family="'Cormorant Garamond', serif" font-size="6.6" letter-spacing="1.2" fill="#A2816F">${esc(p.issue || 'STYLING BOARD')}</text>`);
+  push(`<path d="M20,32 L${W - 20},32" stroke="#AC8B77" stroke-opacity=".34" stroke-width=".6"/>`);
 
   /* ── 카드 ── */
   const hasTop = !!top, hasBot = !!bot, hasAnk = !!ank;
 
-  const A = hasBot ? { x: 28, y: 52, w: 150, h: 182, rot: -3.2 } : { x: 40, y: 54, w: 158, h: 196, rot: -2.8 };
-  const B = { x: 176, y: 34, w: 120, h: 136, rot: 6.8 };
-  const C = { x: 106, y: 220, w: 168, h: 148, rot: -1.8 };
-  const D = hasBot ? { x: 20, y: 288, w: 78, h: 98, rot: 6.2 } : { x: 188, y: 296, w: 80, h: 100, rot: -5.2 };
+  const A = hasBot ? { x: 26, y: 44, w: 148, h: 176, rot: -3.0 } : { x: 36, y: 46, w: 152, h: 190, rot: -2.6 };
+  const B = { x: 180, y: 34, w: 118, h: 132, rot: 6.4 };
+  const C = { x: 98, y: 210, w: 164, h: 140, rot: -1.6 };
+  const D = hasBot ? { x: 20, y: 264, w: 78, h: 94, rot: 5.6 } : { x: 184, y: 268, w: 82, h: 98, rot: -5.0 };
 
   const layer = [];
   if (hasTop) layer.push({ z: 1, el: cardFrame(B.x, B.y, B.w, B.h, B.rot, (w, h) => topCardInner(top, w, h, k), { caption: capFor(top, 'TOP'), frame: 'polaroid' }) });
@@ -654,85 +657,87 @@ function boardArt(p) {
 
   /* ── 테이프 · 클립 ── */
   if (hasTop) {
-    push(`<g transform="translate(${B.x + 14} ${B.y + 3}) rotate(-36)"><rect x="-14" y="-4.8" width="28" height="9.6" fill="url(#b-tape)" opacity=".82"/></g>`);
-    const cx = B.x + B.w - 13, cy = B.y + 9;
-    push(`<g transform="rotate(10 ${cx} ${cy})" fill="none" stroke="#B5A294" stroke-opacity=".7" stroke-width="1.4" stroke-linecap="round">
-        <path d="M${cx},${cy + 13} L${cx},${cy - 5} C${cx},${cy - 11} ${cx + 7.6},${cy - 11} ${cx + 7.6},${cy - 5} L${cx + 7.6},${cy + 16} C${cx + 7.6},${cy + 22} ${cx - 1},${cy + 22} ${cx - 1},${cy + 16} L${cx - 1},${cy - 1}"/>
+    push(`<g transform="translate(${B.x + 13} ${B.y + 2}) rotate(-36)"><rect x="-13" y="-4.4" width="26" height="8.8" fill="url(#b-tape)" opacity=".85"/></g>`);
+    const cx = B.x + B.w - 12, cy = B.y + 8;
+    push(`<g transform="rotate(10 ${cx} ${cy})" fill="none" stroke="#B5A294" stroke-opacity=".72" stroke-width="1.4" stroke-linecap="round">
+        <path d="M${cx},${cy + 12} L${cx},${cy - 5} C${cx},${cy - 10.5} ${cx + 7},${cy - 10.5} ${cx + 7},${cy - 5} L${cx + 7},${cy + 15} C${cx + 7},${cy + 20.5} ${cx - 1},${cy + 20.5} ${cx - 1},${cy + 15} L${cx - 1},${cy - 1}"/>
       </g>`);
   }
-  push(`<g transform="translate(${A.x + 4} ${A.y + 12}) rotate(-44)"><rect x="-13" y="-4.4" width="26" height="8.8" fill="url(#b-tape)" opacity=".78"/></g>`);
+  push(`<g transform="translate(${A.x + 3} ${A.y + 13}) rotate(-46)"><rect x="-12" y="-4.2" width="24" height="8.4" fill="url(#b-tape)" opacity=".8"/></g>`);
   if (hasBot) {
-    push(`<g transform="translate(${C.x + C.w - 10} ${C.y + C.h - 16}) rotate(-34)"><rect x="-12" y="-4.4" width="24" height="8.8" fill="url(#b-tape)" opacity=".72"/></g>`);
+    push(`<g transform="translate(${C.x + C.w - 9} ${C.y + C.h - 15}) rotate(-34)"><rect x="-11}" y="-4.2" width="22" height="8.4" fill="url(#b-tape)" opacity=".72"/></g>`.replace('x="-11}"','x="-11"'));
   }
   if (hasAnk) {
-    push(`<g transform="translate(${D.x + D.w - 9} ${D.y + 6}) rotate(38)"><rect x="-11" y="-4" width="22" height="8" fill="url(#b-tape)" opacity=".7"/></g>`);
+    push(`<g transform="translate(${D.x + D.w - 8} ${D.y + 5}) rotate(38)"><rect x="-10" y="-3.8" width="20" height="7.6" fill="url(#b-tape)" opacity=".7"/></g>`);
   }
-
-  /* ── 스와치 칩 ── */
-  const swY = 392;
-  palette.forEach((col, i) => {
-    const x = 21 + i * 17;
-    push(`<g transform="translate(${x} ${swY}) rotate(${(i % 2 ? 2.4 : -2)} )">
-        <rect x="0" y="0" width="14" height="15" rx=".8" fill="${col}" stroke="#7A5F52" stroke-opacity=".18" stroke-width=".6"/>
-        <rect x="0" y="0" width="14" height="3.4" fill="#000" opacity=".07"/>
-        <path d="M0,15 L14,15" stroke="#7A5F52" stroke-opacity=".12" stroke-width=".6"/>
-      </g>`);
-  });
 
   /* ── 캡션 블록 ── */
   const title = p.title || '오늘의 코디';
-  const sub = fit((p.items || chosen.map((i) => i.short || i.name).join(' · ')), 40);
+  const sub = fit((p.items || chosen.map((i) => i.short || i.name).join(' · ')), 38);
   const date = p.date || '';
-  const baseY = 386;
-  push(`<path d="M21,376 L${W - 21},376" stroke="#B0907C" stroke-opacity=".3" stroke-width=".55"/>`);
-  push(`<text x="${W - 21}" y="${swY - 8}" text-anchor="end" font-family="'Cormorant Garamond', serif" font-size="5" letter-spacing="1.6" fill="#B1988A">COLOR PALETTE</text>`);
-  push(`<text x="21" y="${baseY + 12}" font-family="'Cormorant Garamond', serif" font-size="5.2" letter-spacing="1.9" fill="#B08F80">TODAY'S LOOK</text>`);
-  push(`<text x="21" y="${baseY + 30}" font-family="'Noto Serif KR', 'Cormorant Garamond', serif" font-size="15" letter-spacing=".1" fill="#493A34">${esc(title)}</text>`);
-  push(`<text x="21" y="${baseY + 42}" font-family="'Noto Serif KR', sans-serif" font-size="5.9" letter-spacing=".1" fill="#9A8578">${esc(sub)}</text>`);
-  if (date) push(`<text x="${W - 21}" y="${baseY + 42}" text-anchor="end" font-family="'Cormorant Garamond', serif" font-size="5.4" letter-spacing="1" fill="#B49A8B">${esc(date)}</text>`);
+  const baseY = 376;
+  push(`<path d="M20,${baseY} L${W - 20},${baseY}" stroke="#AC8B77" stroke-opacity=".3" stroke-width=".6"/>`);
+  push(`<text x="20" y="${baseY + 12}" font-family="'Cormorant Garamond', serif" font-size="5.6" letter-spacing="2" fill="#B08F80">TODAY'S LOOK</text>`);
+  push(`<text x="20" y="${baseY + 31}" font-family="'Noto Serif KR', 'Cormorant Garamond', serif" font-size="15.5" letter-spacing=".1" fill="#453630">${esc(title)}</text>`);
+  push(`<text x="20" y="${baseY + 44}" font-family="'Noto Serif KR', sans-serif" font-size="6.2" letter-spacing=".1" fill="#97826F">${esc(sub)}</text>`);
+  if (date) push(`<text x="20" y="${baseY + 56}" font-family="'Cormorant Garamond', serif" font-size="5.6" letter-spacing="1.2" fill="#B49A8B">${esc(date)}</text>`);
+
+  /* ── 컬러 팔레트 ── */
+  const swY = baseY + 14;
+  palette.forEach((col, i) => {
+    const cx = W - 24 - i * 15.5;
+    push(`<g transform="rotate(${i % 2 ? 3 : -2} ${cx} ${swY})">
+        <rect x="${cx - 5.6}" y="${swY - 6.4}" width="11.2" height="12.8" rx=".8" fill="${col}" stroke="#6E5344" stroke-opacity=".2" stroke-width=".6"/>
+        <rect x="${cx - 5.6}" y="${swY - 6.4}" width="11.2" height="2.6" fill="#000" opacity=".08"/>
+      </g>`);
+  });
+  push(`<text x="${W - 20}" y="${swY + 17}" text-anchor="end" font-family="'Cormorant Garamond', serif" font-size="5.2" letter-spacing="1.6" fill="#B1988A">COLOR PALETTE${p.score ? ' · HARMONY ' + esc(String(p.score)) : ''}</text>`);
 
   const defs = `<defs>
     <linearGradient id="b-paper" x1="0" y1="0" x2="0.55" y2="1">
       <stop offset="0" stop-color="#FEFAF3"/><stop offset=".38" stop-color="#FAF1E6"/><stop offset=".72" stop-color="#F6EADD"/><stop offset="1" stop-color="#EFDFD1"/>
     </linearGradient>
-    <radialGradient id="b-light" gradientUnits="userSpaceOnUse" cx="150" cy="88" r="156">
-      <stop offset="0" stop-color="#FFFEFB" stop-opacity=".95"/><stop offset=".5" stop-color="#FFF9F0" stop-opacity=".5"/><stop offset="1" stop-color="#FFF9F0" stop-opacity="0"/>
+    <radialGradient id="b-light" gradientUnits="userSpaceOnUse" cx="140" cy="80" r="170">
+      <stop offset="0" stop-color="#FFFEFB" stop-opacity=".95"/><stop offset=".5" stop-color="#FFF9F0" stop-opacity=".45"/><stop offset="1" stop-color="#FFF9F0" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="b-vignette" gradientUnits="userSpaceOnUse" cx="170" cy="215" r="236">
-      <stop offset=".58" stop-color="#8A6A56" stop-opacity="0"/><stop offset="1" stop-color="#8A6A56" stop-opacity=".14"/>
+    <radialGradient id="b-vignette" gradientUnits="userSpaceOnUse" cx="170" cy="215" r="238">
+      <stop offset=".58" stop-color="#8A6A56" stop-opacity="0"/><stop offset="1" stop-color="#8A6A56" stop-opacity=".15"/>
     </radialGradient>
     <linearGradient id="b-photoShade" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#4A3226" stop-opacity=".12"/><stop offset=".32" stop-color="#4A3226" stop-opacity="0"/><stop offset="1" stop-color="#4A3226" stop-opacity=".14"/>
+      <stop offset="0" stop-color="#4A3226" stop-opacity=".09"/><stop offset=".32" stop-color="#4A3226" stop-opacity="0"/><stop offset="1" stop-color="#4A3226" stop-opacity=".10"/>
     </linearGradient>
     <linearGradient id="b-tape" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#F4E8D8" stop-opacity=".2"/><stop offset=".16" stop-color="#FBF2E4" stop-opacity=".8"/><stop offset=".84" stop-color="#FBF2E4" stop-opacity=".8"/><stop offset="1" stop-color="#F4E8D8" stop-opacity=".18"/>
+      <stop offset="0" stop-color="#F4E8D8" stop-opacity=".2"/><stop offset=".16" stop-color="#FBF2E4" stop-opacity=".85"/><stop offset=".84" stop-color="#FBF2E4" stop-opacity=".85"/><stop offset="1" stop-color="#F4E8D8" stop-opacity=".18"/>
     </linearGradient>
     <linearGradient id="b-sheer" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity=".3"/>
     </linearGradient>
+    <linearGradient id="b-sweep" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset=".45" stop-color="#fff" stop-opacity=".04"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
     <filter id="b-card" x="-30%" y="-25%" width="160%" height="160%">
-      <feDropShadow dx="1.4" dy="5.6" stdDeviation="5" flood-color="#6A4B3A" flood-opacity=".24"/>
+      <feDropShadow dx="1.2" dy="5.2" stdDeviation="4.6" flood-color="#6A4B3A" flood-opacity=".26"/>
     </filter>
     <filter id="b-tone" x="-4%" y="-4%" width="108%" height="108%">
-      <feColorMatrix type="matrix" values="0.955 0.045 0.015 0 0.020  0.028 0.955 0.012 0 0.014  0.016 0.040 0.905 0 0.010  0 0 0 1 0"/>
+      <feColorMatrix type="matrix" values="1.010 0.020 0.008 0 0.004  0.012 1.005 0.006 0 0.003  0.006 0.018 0.982 0 0.002  0 0 0 1 0"/>
       <feComponentTransfer>
-        <feFuncR type="linear" slope="0.955" intercept="0.030"/>
-        <feFuncG type="linear" slope="0.955" intercept="0.024"/>
-        <feFuncB type="linear" slope="0.930" intercept="0.018"/>
+        <feFuncR type="linear" slope="1.055" intercept="-0.020"/>
+        <feFuncG type="linear" slope="1.055" intercept="-0.020"/>
+        <feFuncB type="linear" slope="1.050" intercept="-0.018"/>
       </feComponentTransfer>
     </filter>
     <filter id="b-noise" x="0" y="0" width="100%" height="100%">
       <feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="3" stitchTiles="stitch"/>
       <feColorMatrix type="saturate" values="0"/>
     </filter>
-    <pattern id="b-grain" width="140" height="140" patternUnits="userSpaceOnUse">
-      <rect width="140" height="140" filter="url(#b-noise)" opacity=".16"/>
+    <pattern id="b-grain" width="120" height="120" patternUnits="userSpaceOnUse">
+      <rect width="120" height="120" filter="url(#b-noise)" opacity=".2"/>
+    </pattern>
+    <pattern id="b-cardGrain" width="90" height="90" patternUnits="userSpaceOnUse">
+      <rect width="90" height="90" filter="url(#b-noise)" opacity=".12"/>
     </pattern>
     <pattern id="b-mesh" width="4" height="4" patternUnits="userSpaceOnUse">
       <circle cx="2" cy="2" r=".85" fill="#fff" fill-opacity=".5"/>
-    </pattern>
-    <pattern id="b-cardGrain" width="120" height="120" patternUnits="userSpaceOnUse">
-      <rect width="120" height="120" filter="url(#b-noise)" opacity=".09"/>
     </pattern>
   </defs>`;
 
@@ -744,190 +749,164 @@ function capFor(item, cat) {
   return esc(fit(`${cat} · ${item.short || item.name}`, 24).toUpperCase());
 }
 
-/* 100×100 좌표계로 그리는 원단 디테일 일러스트 */
-function garmentDetail(item, cat, k) {
-  const c = item ? item.color : '#D9C9BE';
-  const line = shade(c, -30);
-  const light = shade(c, 18);
-  const dark = shade(c, -18);
-  const shape = item ? item.shape : 'camisole';
-  const vb = `<defs>
-      <linearGradient id="${k}-g" x1="0.2" y1="0" x2="0.8" y2="1">
-        <stop offset="0" stop-color="${light}"/><stop offset=".45" stop-color="${c}"/><stop offset="1" stop-color="${shade(c, -14)}"/>
-      </linearGradient>
-      <pattern id="${k}-rib" width="2.6" height="2.6" patternUnits="userSpaceOnUse">
-        <path d="M0,0 L0,2.6" stroke="${dark}" stroke-opacity=".22" stroke-width=".7"/>
-      </pattern>
-      <pattern id="${k}-mesh" width="3.2" height="3.2" patternUnits="userSpaceOnUse">
-        <circle cx="1.6" cy="1.6" r=".8" fill="#fff" fill-opacity=".5"/>
-      </pattern>
-      <filter id="${k}-soft" x="-200%" y="-200%" width="500%" height="500%"><feGaussianBlur stdDeviation="1.6"/></filter>
-    </defs>`;
-  const shadeCss = `fill="url(#${k}-g)" stroke="${line}" stroke-width=".55" stroke-opacity=".55" stroke-linejoin="round"`;
+/* 카드 안에 담는 플랫레이 — 제품 사진처럼 놓인 옷 모양 */
+const FLAT = {
+  camisole: { box: [24, 6, 76, 98] },
+  boatneck: { box: [26, 16, 74, 98] },
+  'mesh-crop': { box: [34, 24, 66, 70] },
+  'long-sleeve': { box: [8, 22, 92, 92] },
+  'slim-tee': { box: [10, 20, 90, 88] },
+  'bolero-short': { box: [14, 22, 86, 70] },
+  'skirt-long': { box: [18, 16, 82, 92] },
+  'skirt-short': { box: [18, 18, 82, 86] },
+  'shorts-knit': { box: [28, 18, 72, 92] },
+  'shorts-loose': { box: [26, 16, 74, 92] },
+  ankle: { box: [24, 18, 76, 88] }
+};
 
+function flatPaths(shape) {
+  const cami = {
+    body: 'M40,32 C44,40 56,40 60,32 C64,33 68,36 69,41 C71,49 70,55 68,59 C70,67 71,73 70,78 C69,85 62,89 56,87 C52,85 51,87 50,89 C49,87 48,85 44,87 C38,89 31,85 30,78 C29,73 30,67 32,59 C30,55 29,49 31,41 C32,36 36,33 40,32 Z',
+    extra: '<g stroke="C" stroke-width="4.4" stroke-linecap="round" fill="none"><path d="M39,33 L36,12"/><path d="M61,33 L64,12"/></g>'
+  };
   switch (shape) {
     case 'camisole':
-      return `${vb}
-        <path id="${k}-cam" d="M34,16 C35,11 65,11 66,16 C68,32 68,52 66,66 C65,78 62,86 58,90 L52,70 L48,90 C44,86 41,78 40,66 C38,52 38,32 34,16 Z" ${shadeCss}/>
-        <clipPath id="${k}-clipcam"><use href="#${k}-cam"/></clipPath>
-        <g clip-path="url(#${k}-clipcam)">
-          <path d="M40,24 C42,50 42,74 46,88" stroke="#fff" stroke-opacity=".26" stroke-width="4" fill="none" filter="url(#${k}-soft)"/>
-          <path d="M62,26 C60,50 60,74 56,88" stroke="${dark}" stroke-opacity=".2" stroke-width="4" fill="none" filter="url(#${k}-soft)"/>
-          <path d="M36,52 C44,56 58,56 65,52" stroke="${dark}" stroke-opacity=".16" stroke-width=".8" fill="none"/>
-        </g>
-        <g stroke="${line}" stroke-width="2.4" stroke-linecap="round" fill="none">
-          <path d="M36,16 L34,6"/><path d="M64,16 L66,6"/>
-        </g>
-        <path d="M36,17 C42,24 58,24 64,17" stroke="${line}" stroke-opacity=".45" stroke-width=".8" fill="none"/>`;
+      return cami;
     case 'boatneck':
-      return `${vb}
-        <path id="${k}-bn" d="M24,16 C37,23 63,23 76,16 C77,34 76,52 74,66 C73,78 70,86 66,90 L52,70 L38,90 C34,86 31,78 30,66 C28,52 27,34 24,16 Z" ${shadeCss}/>
-        <clipPath id="${k}-clipbn"><use href="#${k}-bn"/></clipPath>
-        <g clip-path="url(#${k}-clipbn)">
-          <path d="M32,26 C34,52 34,74 38,88" stroke="#fff" stroke-opacity=".24" stroke-width="4.4" fill="none" filter="url(#${k}-soft)"/>
-          <path d="M70,26 C68,52 68,74 64,88" stroke="${dark}" stroke-opacity=".18" stroke-width="4.4" fill="none" filter="url(#${k}-soft)"/>
-          <path d="M28,54 C40,58 62,58 74,54" stroke="${dark}" stroke-opacity=".14" stroke-width=".8" fill="none"/>
-        </g>
-        <path d="M24,16 C37,23 63,23 76,16" stroke="${line}" stroke-opacity=".6" stroke-width="1.4" fill="none"/>
-        <path d="M25,19 C38,26 62,26 75,19" stroke="${light}" stroke-opacity=".55" stroke-width=".8" fill="none"/>`;
-    case 'slim-tee':
-      return `${vb}
-        <g stroke="${c}" stroke-width="9" stroke-linecap="round" fill="none">
-          <path d="M32,26 C22,40 17,58 15,74"/><path d="M68,26 C78,40 83,58 85,74"/>
-        </g>
-        <g stroke="${dark}" stroke-opacity=".2" stroke-width=".9" fill="none">
-          <path d="M27,34 C21,48 18,62 17,74"/><path d="M73,34 C79,48 82,62 83,74"/>
-        </g>
-        <path d="M31,20 C40,15 60,15 69,20 C71,36 71,54 69,66 C59,71 41,71 31,66 C29,54 29,36 31,20 Z" ${shadeCss}/>
-        <path d="M36,16 Q50,25 64,16" fill="none" stroke="${line}" stroke-opacity=".55" stroke-width="1.5"/>
-        <path d="M33,66 q4,5 8,0 q4,5 8,0 q4,5 8,0 q4,5 8,0" fill="none" stroke="${line}" stroke-opacity=".5" stroke-width="1.2"/>
-        <path d="M42,22 C42,38 42,54 43,64" stroke="#fff" stroke-opacity=".26" stroke-width="4" stroke-linecap="round" fill="none" filter="url(#${k}-soft)"/>
-        <g stroke="${dark}" stroke-opacity=".22" stroke-width="1" fill="none" stroke-linecap="round">
-          <path d="M14,74 q3,4 6,1 q3,4 6,1"/><path d="M86,74 q-3,4 -6,1 q-3,4 -6,1"/>
-        </g>
-        <path d="M34,17 L32,7" stroke="${line}" stroke-opacity=".5" stroke-width="1.4" fill="none"/>`;
+      return {
+        body: 'M34,26 C41,33 59,33 66,26 C70,28 72,32 73,37 C74,45 72,52 70,57 C72,65 73,73 72,79 C71,86 63,90 57,88 C53,86 51,88 50,90 C49,88 47,86 43,88 C37,90 29,86 28,79 C27,73 28,65 30,57 C28,52 26,45 27,37 C28,32 30,28 34,26 Z',
+        extra: '<path d="M34,25 C42,32 58,32 66,25" fill="none" stroke="L" stroke-width="2" stroke-opacity=".5"/>'
+      };
     case 'long-sleeve':
-      return `${vb}
-        <g stroke="${c}" stroke-width="11" stroke-linecap="round" fill="none">
-          <path d="M33,24 C23,40 18,58 16,78"/><path d="M67,24 C77,40 82,58 84,78"/>
-        </g>
-        <g stroke="url(#${k}-rib)" stroke-width="11" stroke-linecap="round" fill="none">
-          <path d="M33,24 C23,40 18,58 16,78"/><path d="M67,24 C77,40 82,58 84,78"/>
-        </g>
-        <g stroke="${dark}" stroke-opacity=".18" stroke-width=".9" fill="none">
-          <path d="M28,32 C22,46 19,62 18,76"/><path d="M72,32 C78,46 81,62 82,76"/>
-        </g>
-        <path d="M33,24 Q50,34 67,24" fill="none" stroke="${c}" stroke-width="7" stroke-linecap="round"/>
-        <path d="M33,24 Q50,34 67,24" fill="none" stroke="${line}" stroke-opacity=".45" stroke-width=".9"/>
-        <g stroke="${line}" stroke-opacity=".5" stroke-width="1.4" stroke-linecap="round" fill="none">
-          <path d="M14,76 C16,79 19,79 21,77"/><path d="M86,76 C84,79 81,79 79,77"/>
-        </g>
-        <path d="M40,30 C37,48 34,64 31,78" stroke="#fff" stroke-opacity=".2" stroke-width="2.4" stroke-linecap="round" fill="none" filter="url(#${k}-soft)"/>`;
+      return {
+        body: 'M40,26 C36,28 32,32 30,38 C29,52 29,70 30,86 C37,89 44,89 50,87 C56,89 63,89 70,86 C71,70 71,52 70,38 C68,32 64,28 60,26 C55,33 45,33 40,26 Z',
+        extra: '<g stroke="S" stroke-width="11" stroke-linecap="round" fill="none"><path d="M31,33 C24,46 17,62 12,78"/><path d="M69,33 C76,46 83,62 88,78"/></g>'
+      };
+    case 'slim-tee':
+      return {
+        body: 'M40,26 C36,28 32,32 31,38 C30,50 30,64 31,76 q4,5 8,0 q4,5 8,0 q4,5 8,0 q4,5 8,0 C 69,64 69,50 68,38 C67,32 64,28 60,26 C55,33 45,33 40,26 Z',
+        extra: '<g stroke="S" stroke-width="10" stroke-linecap="round" fill="none"><path d="M32,34 C25,46 19,60 16,74"/><path d="M68,34 C75,46 81,60 84,74"/></g>'
+      };
     case 'bolero-short':
-      return `${vb}
-        <g stroke="${c}" stroke-width="11" stroke-linecap="round" fill="none">
-          <path d="M33,24 C27,36 23,48 21,58"/><path d="M67,24 C73,36 77,48 79,58"/>
-        </g>
-        <g stroke="${dark}" stroke-opacity=".2" stroke-width=".9" fill="none">
-          <path d="M28,32 C24,42 21,52 20,58"/><path d="M72,32 C76,42 79,52 80,58"/>
-        </g>
-        <path d="M33,24 Q50,35 67,24" fill="none" stroke="${c}" stroke-width="7.6" stroke-linecap="round"/>
-        <path d="M33,24 Q50,35 67,24" fill="none" stroke="${line}" stroke-opacity=".5" stroke-width=".9"/>
-        <path d="M46,24 C44,36 43,50 43,64" fill="none" stroke="${line}" stroke-opacity=".22" stroke-width="1"/>
-        <path d="M54,24 C56,36 57,50 57,64" fill="none" stroke="${line}" stroke-opacity=".22" stroke-width="1"/>
-        <g stroke="${line}" stroke-opacity=".45" stroke-width="1.3" stroke-linecap="round" fill="none">
-          <path d="M20,56 C23,59 27,59 29,56"/><path d="M80,56 C77,59 73,59 71,56"/>
-        </g>`;
+      return {
+        body: 'M40,26 C36,28 32,32 31,38 C30,46 31,54 33,58 C37,52 41,46 46,42 C43,36 42,31 42,28 Z M60,26 C64,28 68,32 69,38 C70,46 69,54 67,58 C63,52 59,46 54,42 C57,36 58,31 58,28 Z',
+        extra: '<g stroke="S" stroke-width="10" stroke-linecap="round" fill="none"><path d="M33,34 C28,42 24,50 22,56"/><path d="M67,34 C72,42 76,50 78,56"/></g>'
+      };
     case 'mesh-crop':
-      return `${vb}
-        <path d="M32,22 Q50,30 68,22 C70,38 68,54 66,62 Q50,68 34,62 C32,54 30,38 32,22 Z" fill="${c}" fill-opacity=".55" stroke="${line}" stroke-opacity=".45" stroke-width=".7"/>
-        <path d="M32,22 Q50,30 68,22 C70,38 68,54 66,62 Q50,68 34,62 C32,54 30,38 32,22 Z" fill="url(#${k}-mesh)"/>
-        <path d="M33,23 Q50,31 67,23" fill="none" stroke="${line}" stroke-opacity=".5" stroke-width="1.2"/>
-        <g stroke="${line}" stroke-opacity=".4" stroke-width="1" fill="none">
-          <path d="M39,26 C37,40 37,52 39,62"/><path d="M50,28 L50,64"/><path d="M61,26 C63,40 63,52 61,62"/>
-        </g>
-        <g stroke="${c}" stroke-width="2" stroke-linecap="round" fill="none">
-          <path d="M35,21 L33,12"/><path d="M65,21 L67,12"/>
-        </g>`;
+      return {
+        body: 'M38,28 C43,32 57,32 62,28 C65,38 65,52 63,62 C56,67 44,67 37,62 C35,52 35,38 38,28 Z',
+        extra: '<g stroke="C" stroke-width="3" stroke-linecap="round" fill="none"><path d="M40,30 L38,22"/><path d="M60,30 L62,22"/></g>'
+      };
     case 'skirt-long':
-      return `${vb}
-        <path id="${k}-sl" d="M34,20 L66,20 L80,82 Q50,90 20,82 Z" ${shadeCss}/>
-        <clipPath id="${k}-clipsl"><use href="#${k}-sl"/></clipPath>
-        <g clip-path="url(#${k}-clipsl)">
-          <path d="M46,22 C42,44 36,64 28,82" stroke="#fff" stroke-opacity=".24" stroke-width="5" fill="none" filter="url(#${k}-soft)"/>
-          <path d="M58,22 C62,44 68,64 76,82" stroke="${dark}" stroke-opacity=".16" stroke-width="5" fill="none" filter="url(#${k}-soft)"/>
-          <path d="M40,24 C36,48 30,68 22,84" stroke="${dark}" stroke-opacity=".13" stroke-width="1" fill="none"/>
-          <path d="M50,24 L48,88" stroke="${dark}" stroke-opacity=".13" stroke-width="1" fill="none"/>
-          <path d="M62,24 C66,48 72,68 78,84" stroke="${dark}" stroke-opacity=".13" stroke-width="1" fill="none"/>
-          <rect x="18" y="64" width="64" height="26" fill="url(#b-sheer)"/>
-        </g>
-        <path d="M34,20 L66,20 L66,28 L34,28 Z" fill="${dark}" fill-opacity=".28"/>
-        <path d="M34,20 L66,20" stroke="${line}" stroke-opacity=".5" stroke-width=".9"/>
-        <path d="M44,28 C42,52 38,72 33,86" stroke="${light}" stroke-opacity=".3" stroke-width="2" fill="none"/>`;
+      return {
+        body: 'M30,20 L70,20 C74,40 80,64 84,82 C74,86 62,88 50,87 C38,86 26,84 18,80 C22,62 26,40 30,20 Z',
+        extra: '<path d="M70,22 C66,42 60,66 54,86" fill="none" stroke="L" stroke-width="1.8" stroke-opacity=".45"/>'
+      };
     case 'skirt-short':
-      return `${vb}
-        <path id="${k}-ss" d="M32,22 L68,22 L78,64 Q50,72 22,64 Z" ${shadeCss}/>
-        <clipPath id="${k}-clipss"><use href="#${k}-ss"/></clipPath>
-        <g clip-path="url(#${k}-clipss)">
-          <path d="M44,24 C40,40 34,54 28,64" stroke="#fff" stroke-opacity=".26" stroke-width="4.4" fill="none" filter="url(#${k}-soft)"/>
-          <path d="M58,24 C62,40 68,54 74,64" stroke="${dark}" stroke-opacity=".16" stroke-width="4.4" fill="none" filter="url(#${k}-soft)"/>
-          <path d="M38,26 C34,42 30,56 26,66" stroke="${dark}" stroke-opacity=".12" stroke-width=".9" fill="none"/>
-          <path d="M50,26 L49,68" stroke="${dark}" stroke-opacity=".12" stroke-width=".9" fill="none"/>
-          <path d="M62,26 C66,42 70,56 74,66" stroke="${dark}" stroke-opacity=".12" stroke-width=".9" fill="none"/>
-        </g>
-        <path d="M32,22 L68,22 L68,30 L32,30 Z" fill="${dark}" fill-opacity=".3"/>
-        <path d="M32,22 L68,22" stroke="${line}" stroke-opacity=".5" stroke-width=".9"/>`;
+      return {
+        body: 'M30,20 L70,20 C74,38 79,54 82,68 C70,72 58,74 44,73 C34,72 26,70 20,67 C23,52 27,36 30,20 Z',
+        extra: '<path d="M70,22 C66,40 61,56 57,71" fill="none" stroke="L" stroke-width="1.8" stroke-opacity=".45"/>'
+      };
     case 'shorts-knit':
-      return `${vb}
-        <path id="${k}-sk" d="M30,20 L70,20 L68,80 L55,80 L51,46 L49,46 L45,80 L32,80 Z" ${shadeCss}/>
-        <clipPath id="${k}-clipsk"><use href="#${k}-sk"/></clipPath>
-        <g clip-path="url(#${k}-clipsk)">
-          <rect x="28" y="18" width="44" height="64" fill="url(#${k}-rib)"/>
-          <path d="M36,22 C35,42 34,60 34,78" stroke="#fff" stroke-opacity=".2" stroke-width="4" fill="none" filter="url(#${k}-soft)"/>
-          <path d="M64,22 C65,42 66,60 66,78" stroke="${dark}" stroke-opacity=".14" stroke-width="4" fill="none" filter="url(#${k}-soft)"/>
-        </g>
-        <path d="M30,20 L70,20 L70,28 L30,28 Z" fill="${dark}" fill-opacity=".26"/>
-        <g stroke="${dark}" stroke-opacity=".6" stroke-width="1.6" fill="none" stroke-linecap="round">
-          <path d="M70,34 q5,-4 5,-9"/><path d="M70,34 q6,3 9,1"/><path d="M70,34 q-1,6 -5,8"/>
-        </g>`;
+      return {
+        body: 'M30,18 L70,18 C71,40 71,64 70,86 L56,86 L53,52 L50,49 L47,52 L44,86 L30,86 C29,64 29,40 30,18 Z',
+        extra: '<path d="M30,24 L70,24" fill="none" stroke="L" stroke-width="1.6" stroke-opacity=".4"/>'
+      };
     case 'shorts-loose':
-      return `${vb}
-        <path id="${k}-slo" d="M28,18 L72,18 L70,80 L56,80 L51,44 L49,44 L44,80 L30,80 Z" ${shadeCss}/>
-        <clipPath id="${k}-clipslo"><use href="#${k}-slo"/></clipPath>
-        <g clip-path="url(#${k}-clipslo)">
-          <path d="M34,22 C33,42 32,62 31,78" stroke="#fff" stroke-opacity=".22" stroke-width="4.4" fill="none" filter="url(#${k}-soft)"/>
-          <path d="M66,22 C67,42 68,62 69,78" stroke="${dark}" stroke-opacity=".14" stroke-width="4.4" fill="none" filter="url(#${k}-soft)"/>
-          <path d="M28,34 C44,40 60,40 72,34" stroke="${dark}" stroke-opacity=".16" stroke-width="1" fill="none"/>
-          <rect x="26" y="62" width="20" height="18" fill="${dark}" opacity=".10"/>
-          <rect x="54" y="62" width="20" height="18" fill="${dark}" opacity=".10"/>
-        </g>
-        <path d="M28,18 L72,18 L72,27 L28,27 Z" fill="${dark}" fill-opacity=".3"/>
-        <g stroke="${light}" stroke-width="1.6" stroke-linecap="round" fill="none">
-          <path d="M47,28 C46,34 45,38 44,42"/><path d="M53,28 C54,34 55,38 56,42"/>
-        </g>`;
+      return {
+        body: 'M28,16 L72,16 C73,38 73,62 72,84 L57,84 L54,50 L50,47 L46,50 L43,84 L28,84 C27,62 27,38 28,16 Z',
+        extra: '<path d="M28,23 L72,23" fill="none" stroke="L" stroke-width="1.8" stroke-opacity=".4"/><g stroke="L" stroke-width="1.4" stroke-linecap="round" fill="none" opacity=".6"><path d="M47,26 C46,32 45,36 44,40"/><path d="M53,26 C54,32 55,36 56,40"/></g>'
+      };
     case 'ankle':
-      return `${vb}
-        <g ${shadeCss}>
-          <path d="M26,22 C25,36 25,54 26,68 C27,74 30,77 34,76 C38,75 40,71 40,66 C41,54 41,36 40,22 Z"/>
-          <path d="M60,22 C61,36 61,54 60,68 C59,74 56,77 52,76 C48,75 46,71 46,66 C45,54 45,36 46,22 Z"/>
-        </g>
-        <clipPath id="${k}-clipank"><path d="M26,22 C25,36 25,54 26,68 C27,74 30,77 34,76 C38,75 40,71 40,66 C41,54 41,36 40,22 Z"/></clipPath>
-        <g clip-path="url(#${k}-clipank)">
-          <rect x="24" y="20" width="18" height="60" fill="url(#${k}-rib)"/>
-          <path d="M30,26 C29,44 29,60 30,74" stroke="#fff" stroke-opacity=".26" stroke-width="3" fill="none" filter="url(#${k}-soft)"/>
-        </g>
-        <clipPath id="${k}-clipank2"><path d="M60,22 C61,36 61,54 60,68 C59,74 56,77 52,76 C48,75 46,71 46,66 C45,54 45,36 46,22 Z"/></clipPath>
-        <g clip-path="url(#${k}-clipank2)">
-          <rect x="44" y="20" width="18" height="60" fill="url(#${k}-rib)"/>
-          <path d="M56,26 C57,44 57,60 56,74" stroke="#fff" stroke-opacity=".26" stroke-width="3" fill="none" filter="url(#${k}-soft)"/>
-        </g>
-        <g stroke="${line}" stroke-opacity=".35" stroke-width=".8" fill="none">
-          <path d="M26,32 C31,34 36,34 40,32"/><path d="M26,44 C31,46 36,46 40,44"/><path d="M26,56 C31,58 36,58 40,56"/>
-          <path d="M46,32 C51,34 56,34 60,32"/><path d="M46,44 C51,46 56,46 60,44"/><path d="M46,56 C51,58 56,58 60,56"/>
-        </g>`;
+      return {
+        body: 'M27,24 C25,38 25,58 26,74 C27,80 30,83 34,82 C38,81 40,77 40,71 C41,56 41,38 40,24 Z M60,24 C62,38 62,58 61,74 C60,80 57,83 53,82 C49,81 47,77 47,71 C46,56 46,38 47,24 Z',
+        extra: ''
+      };
     default:
-      return `${vb}<rect x="30" y="24" width="40" height="52" rx="3" ${shadeCss}/>`;
+      return null;
   }
+}
+
+/* 카드 안에 담는 디테일 카드 (100×100 좌표계) */
+function garmentDetail(item, cat, k) {
+  const shape = item ? item.shape : 'camisole';
+  const spec = FLAT[shape];
+  const flat = flatPaths(shape);
+  const c = item ? item.color : '#D9C9BE';
+  const L = shade(c, -30), S = shade(c, 16), D = shade(c, -16);
+
+  if (!flat) {
+    /* 정의되지 않은 실루엣은 옷 모양 카드로 대신한다 */
+    return `<g transform="translate(50 50)">
+      <defs><linearGradient id="${k}-g" x1="0" y1="0" x2="0.6" y2="1">
+        <stop offset="0" stop-color="${S}"/><stop offset=".5" stop-color="${c}"/><stop offset="1" stop-color="${D}"/>
+      </linearGradient></defs>
+      <rect x="-22" y="-26" width="44" height="52" rx="4" fill="url(#${k}-g)" stroke="${L}" stroke-opacity=".4" stroke-width=".8"/>
+      <path d="M-10,-18 L-10,26" stroke="#fff" stroke-opacity=".2" stroke-width="5" stroke-linecap="round"/>
+    </g>`;
+  }
+
+  const box = (spec || FLAT.camisole).box;
+  const bw = box[2] - box[0], bh = box[3] - box[1];
+  const cx = (box[0] + box[2]) / 2, cy = (box[1] + box[3]) / 2;
+  const sc = Math.min(88 / bh, 84 / bw);
+  const extra = (flat.extra || '').replace(/"C"/g, `"${c}"`).replace(/"S"/g, `"url(#${k}-gs)"`).replace(/"L"/g, `"${L}"`);
+
+  const knit = shape === 'shorts-knit' || shape === 'ankle';
+  const sheer = shape === 'skirt-long' || shape === 'skirt-short' || shape === 'mesh-crop';
+
+  return `<g transform="translate(50 50) scale(${sc}) translate(${-cx} ${-cy})">
+    <defs>
+      <linearGradient id="${k}-g" x1="0" y1="0" x2="0.45" y2="1">
+        <stop offset="0" stop-color="${S}"/><stop offset=".45" stop-color="${c}"/><stop offset="1" stop-color="${D}"/>
+      </linearGradient>
+      <linearGradient id="${k}-gs" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="${shade(c, -6)}"/><stop offset=".38" stop-color="${S}"/><stop offset="1" stop-color="${shade(c, -12)}"/>
+      </linearGradient>
+      <linearGradient id="${k}-shade" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset=".55" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".13"/>
+      </linearGradient>
+      <linearGradient id="${k}-sheer" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity=".32"/>
+      </linearGradient>
+      <filter id="${k}-blur" x="-200%" y="-200%" width="500%" height="500%"><feGaussianBlur stdDeviation="2.6"/></filter>
+      <pattern id="${k}-rib" width="3.2" height="3.2" patternUnits="userSpaceOnUse">
+        <path d="M0,0 L0,3.2" stroke="${L}" stroke-opacity=".32" stroke-width=".8"/>
+      </pattern>
+      <pattern id="${k}-mesh" width="4" height="4" patternUnits="userSpaceOnUse">
+        <circle cx="2" cy="2" r="1" fill="#fff" fill-opacity=".55"/>
+      </pattern>
+    </defs>
+    ${extra}
+    <path id="${k}-p" d="${flat.body}" fill="url(#${k}-g)" stroke="${L}" stroke-opacity=".45" stroke-width="1" stroke-linejoin="round"/>
+    <clipPath id="${k}-c"><path d="${flat.body}"/></clipPath>
+    <g clip-path="url(#${k}-c)">
+      <rect x="${box[0] - 4}" y="${box[1] - 4}" width="${bw + 8}" height="${bh + 8}" fill="url(#${k}-shade)"/>
+      ${knit ? `<rect x="${box[0] - 4}" y="${box[1] - 4}" width="${bw + 8}" height="${bh + 8}" fill="url(#${k}-rib)" opacity=".8"/>` : ''}
+      ${shape === 'mesh-crop' ? `<rect x="${box[0] - 4}" y="${box[1] - 4}" width="${bw + 8}" height="${bh + 8}" fill="url(#${k}-mesh)"/>` : ''}
+      <path d="M${cx - bw * 0.18},${box[1] + 6} C${cx - bw * 0.26},${cy} ${cx - bw * 0.3},${box[3] - 14} ${cx - bw * 0.16},${box[3] - 2}" stroke="#fff" stroke-opacity=".26" stroke-width="7" stroke-linecap="round" fill="none" filter="url(#${k}-blur)"/>
+      <path d="M${cx + bw * 0.2},${box[1] + 4} C${cx + bw * 0.28},${cy} ${cx + bw * 0.3},${box[3] - 12} ${cx + bw * 0.16},${box[3] - 2}" stroke="${L}" stroke-opacity=".2" stroke-width="7" stroke-linecap="round" fill="none" filter="url(#${k}-blur)"/>
+      ${sheer ? `<rect x="${box[0] - 4}" y="${box[3] - bh * 0.34}" width="${bw + 8}" height="${bh * 0.34 + 4}" fill="url(#${k}-sheer)"/>` : ''}
+      ${shape === 'skirt-long' || shape === 'skirt-short'
+        ? `<g stroke="${L}" stroke-opacity=".16" fill="none" stroke-width="1.1">
+             <path d="M${cx - 12},${box[1] + 3} C${cx - 16},${cy} ${cx - 22},${box[3] - 18} ${cx - 26},${box[3] - 4}"/>
+             <path d="M${cx},${box[1] + 3} L${cx - 2},${box[3] - 3}"/>
+             <path d="M${cx + 12},${box[1] + 3} C${cx + 16},${cy} ${cx + 22},${box[3] - 18} ${cx + 26},${box[3] - 4}"/>
+           </g>` : ''}
+    </g>
+    ${shape === 'camisole'
+      ? `<path d="M40,33 C44,41 56,41 60,33" fill="none" stroke="${L}" stroke-opacity=".5" stroke-width="1.8"/>`
+      : shape === 'boatneck'
+        ? `<path d="M35,27 C42,34 58,34 65,27" fill="none" stroke="${L}" stroke-opacity=".5" stroke-width="2"/>`
+        : ''}
+    ${shape === 'skirt-long' || shape === 'skirt-short'
+      ? `<g><path d="M30,20 L70,20 L70,27 L30,27 Z" fill="${shade(c, -10)}" opacity=".55"/>
+           <path d="M30,20 L70,20" stroke="${L}" stroke-opacity=".55" stroke-width="1.6"/>
+           <path d="M30,27 L70,27" stroke="${L}" stroke-opacity=".3" stroke-width="1"/>
+           <path d="M70,22 C66,40 61,58 56,73" fill="none" stroke="${shade(c, -18)}" stroke-opacity=".45" stroke-width="1.6"/></g>` : ''}
+    ${shape === 'shorts-loose' || shape === 'shorts-knit'
+      ? `<path d="M${box[0]},${box[1] + 5} L${box[2]},${box[1] + 5}" stroke="${L}" stroke-opacity=".45" stroke-width="2"/>` : ''}
+  </g>`;
 }
 
 /* =========================================================
