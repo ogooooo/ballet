@@ -23,6 +23,7 @@ https://ogooooo.github.io/ballet/
 | `style.css` | 디자인 (뉴트럴 · 로즈 · 크림 팔레트, 모바일 퍼스트) |
 | `app.js` | 조합기 · 궁합 점수 · 추천 · SVG 일러스트 · localStorage 기록 |
 | `data.json` | 보유 아이템 14개와 룩북 프리셋 6종 |
+| `assets/` | 브랜드 제품 사진(320×320 카드). 사진이 없는 아이템은 앱이 옷 모양 카드로 그려 줌 |
 | `manifest.json` · `apple-touch-icon.png` · `icon-192.png` · `icon-512.png` | 홈 화면에 추가할 때 쓰는 앱 아이콘과 설정 |
 
 ## 아이폰에서 앱처럼 쓰기
@@ -35,6 +36,14 @@ https://ogooooo.github.io/ballet/
 `data.json`의 `items`, `presets`를 고치면 앱에 바로 반영됩니다. 사용자가 앱에서 직접 추가한
 아이템과 즐겨찾기 · 착용 기록은 브라우저 `localStorage`(`ballet.v1.*`)에 저장되므로 기기마다
 따로 남습니다.
+
+## 아이템 사진
+
+`assets/`의 제품 사진은 각 브랜드 공식 스토어의 상품 이미지에서 아이템별로 잘라
+320×320 카드로 만든 것입니다. 어떤 사진이 어느 상품에서 왔는지는 `data.json`의
+`image`·`imageSrc` 값에 적혀 있습니다. 사진이 없는 아이템은 실루엣과 색으로 그린
+플랫레이 카드가 대신 표시되므로, 사진을 추가하려면 `assets/`에 파일을 넣고 그
+아이템에 `"image": "assets/파일명.jpg"`를 더하면 됩니다.
 
 ## 배포
 

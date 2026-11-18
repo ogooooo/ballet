@@ -41,7 +41,9 @@
       "colorName": "로즈핑크",
       "family": "pink",
       "value": 70,
-      "note": "얼굴빛을 밝혀 주는 컬러핏 핑크"
+      "note": "얼굴빛을 밝혀 주는 컬러핏 핑크",
+      "image": "assets/leo-pink.jpg",
+      "imageSrc": "https://tappi-info.com/collections/mignon-ballet"
     },
     {
       "id": "leo-black",
@@ -336,7 +338,7 @@
       "camisole": "캐미솔 라인이 어깨를 가볍게 드러내요.",
       "boatneck": "보트넥이 쇄골선을 단정하게 정돈해요.",
       "long-sleeve": "긴팔 워머가 팔 라인을 부드럽게 감싸 줘요.",
-      "slim-tee": "긴팔 슬림핏 티가 상체와 팔 라인을 깔끔하게 잡아 줘요.",
+      "slim-tee": "물결 밑단의 크롭 긴팔 티가 상체 라인을 가볍게 잡아 줘요.",
       "bolero-short": "숏 슬리브가 어깨를 가볍게 덮어요.",
       "mesh-crop": "크롭 메쉬가 레이어드 포인트가 돼요.",
       "skirt-long": "13인치 스커트가 골반부터 자연스럽게 떨어져요.",

@@ -409,12 +409,12 @@ function garmentSvg(item) {
   };
   switch (item.shape) {
     case 'camisole':
-      return g(`<path d="M23,15 C24,11 40,11 41,15 C42,26 42,36 41,42 C39,52 35,57 32,57 C29,57 25,52 23,42 C22,36 22,26 23,15 Z"/>
+      return g(`<path d="M23,15 C24,11 40,11 41,15 C42,26 42,34 41,40 C40,47 38,51 35,54 L32,42 L29,54 C26,51 24,47 23,40 C22,34 22,26 23,15 Z"/>
         <path d="M24.5,14 L27,7" fill="none" stroke="${line}" stroke-width="1.9" stroke-linecap="round"/>
         <path d="M39.5,14 L37,7" fill="none" stroke="${line}" stroke-width="1.9" stroke-linecap="round"/>
         <path d="M24,31 Q32,35 40,31" fill="none" stroke="${line}" stroke-opacity=".4" stroke-width=".9"/>`);
     case 'boatneck':
-      return g(`<path d="M18,14 C26,18 38,18 46,14 C46,26 45,36 44,43 C41,53 37,57 32,57 C27,57 23,53 20,43 C19,36 18,26 18,14 Z"/>
+      return g(`<path d="M18,14 C26,18 38,18 46,14 C46,26 45,34 44,40 C43,47 41,51 38,54 L32,42 L26,54 C23,51 21,47 20,40 C19,34 18,26 18,14 Z"/>
         <path d="M18,14 C26,18 38,18 46,14" fill="none" stroke="${line}" stroke-width="1.3"/>
         <path d="M20,32 Q32,36 44,32" fill="none" stroke="${line}" stroke-opacity=".4" stroke-width=".9"/>`);
     case 'slim-tee':
