@@ -696,6 +696,54 @@ input[type="color"] {
 }
 .toast.is-on { opacity: 1; transform: translate(-50%, 0); }
 
+
+/* ---------------- 프리뷰 전환 (일러스트 ↔ 스타일링 보드) ---------------- */
+.view-switch {
+  position: relative;
+  display: flex;
+  gap: 3px;
+  margin: 2px auto 10px;
+  padding: 3px;
+  width: 100%;
+  max-width: 248px;
+  border-radius: 999px;
+  background: rgba(240, 228, 218, .72);
+  border: 1px solid rgba(180, 120, 127, .16);
+  box-shadow: inset 0 1px 2px rgba(93, 62, 56, .05);
+  z-index: 2;
+}
+.vs-btn {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 8px 6px;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  font-family: inherit;
+  font-size: 11.5px;
+  letter-spacing: .01em;
+  color: #9C8A82;
+  cursor: pointer;
+  transition: background .2s ease, color .2s ease, box-shadow .2s ease;
+  -webkit-tap-highlight-color: transparent;
+  white-space: nowrap;
+}
+.vs-btn.is-active {
+  background: #FFFDFA;
+  color: var(--rose-deep);
+  font-weight: 600;
+  box-shadow: 0 2px 6px -2px rgba(93, 62, 56, .28), 0 0 0 1px rgba(180, 120, 127, .12);
+}
+.stage-figure { transition: opacity .18s ease, transform .18s ease, height .28s ease; }
+.stage.is-board .stage-figure { height: 434px; }
+.stage.is-board .stage-figure svg { height: 100%; width: auto; max-width: 100%; }
+.stage.is-board { padding-top: 10px; }
+.stage.is-board::before { height: 42%; opacity: .55; }
+.stage.is-board .stage-head { margin-top: 4px; }
+@media (min-width: 540px) {
+  .stage.is-board .stage-figure { height: 470px; }
+}
+
 @media (min-width: 540px) {
   .masthead { padding-top: 40px; }
   .stage-figure { height: 350px; }

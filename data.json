@@ -174,27 +174,31 @@
       "id": "ankle-beige",
       "category": "ankle",
       "shape": "ankle",
-      "brand": "",
-      "name": "베이지 앵클워머",
-      "short": "베이지",
+      "brand": "아비발레샵",
+      "name": "아비발레샵 베이지 앵클워머",
+      "short": "베이지 앵클",
       "color": "#DCC9B2",
       "colorName": "베이지",
       "family": "neutral",
       "value": 78,
-      "note": "발목을 따뜻하게 감싸는 베이지 앵클워머"
+      "note": "발목을 따뜻하게 감싸는 베이지 앵클워머 (아비 오리지널 발목 숏 워머)",
+      "image": "assets/ankle-beige.jpg",
+      "imageSrc": "https://balletabby.co.kr/product/detail.html?product_no=178"
     },
     {
       "id": "ankle-muted",
       "category": "ankle",
       "shape": "ankle",
-      "brand": "",
-      "name": "톤다운 뮤트핑크 앵클워머",
-      "short": "뮤트핑크",
-      "color": "#C79AA1",
+      "brand": "아비발레샵",
+      "name": "아비발레샵 인디핑크 앵클워머",
+      "short": "뮤트핑크 앵클",
+      "color": "#D8B9B8",
       "colorName": "뮤트핑크",
       "family": "pink",
-      "value": 66,
-      "note": "톤을 낮춘 뮤트핑크 앵클워머"
+      "value": 72,
+      "note": "톤을 낮춘 인디핑크 앵클워머 (아비 오리지널 발목 숏 워머)",
+      "image": "assets/ankle-muted.jpg",
+      "imageSrc": "https://balletabby.co.kr/product/detail.html?product_no=178"
     }
   ],
   "presets": [
