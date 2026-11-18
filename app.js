@@ -408,10 +408,10 @@ function scoreCombo(combo) {
     if (p != null) { sum += p * w; wsum += w; }
   });
   const avg = wsum ? sum / wsum : 14;
-  let s = 62 + (avg - 10) * 3.6;
-  if (top) s += 3;
-  if (bot) s += 2;
-  if (ank) s += 2;
+  let s = 60 + (avg - 10) * 3.3;
+  if (top) s += 2.5;
+  if (bot) s += 1.5;
+  if (ank) s += 1.5;
 
   const chosen = comboItems(combo);
   const pinks = chosen.filter((i) => i.family === 'pink').length;
@@ -421,28 +421,39 @@ function scoreCombo(combo) {
   return clamp(Math.round(s), 58, 99);
 }
 
-function lookTitle(combo) {
+function harmonyKey(combo) {
   const chosen = comboItems(combo);
   const pinks = chosen.filter((i) => i.family === 'pink').length;
   const hasBlack = chosen.some((i) => i.family === 'black');
   const neutrals = chosen.filter((i) => i.family === 'neutral').length;
-  if (hasBlack && pinks >= 1) return '블랙 & 로즈';
-  if (pinks >= 2) return '핑크 레이어드';
-  if (hasBlack) return '모던 모노톤';
-  if (pinks === 1) return '로즈 포인트';
-  if (neutrals >= 3) return '뉴트럴 톤온톤';
-  return '차분한 데일리';
+  if (chosen.length <= 1) return 'single';
+  if (hasBlack && pinks >= 1) return 'blackRose';
+  if (pinks >= 2) return 'pinkLayered';
+  if (hasBlack) return 'mono';
+  if (pinks === 1 && neutrals >= 1) return 'rosePoint';
+  if (pinks === 1) return 'roseTone';
+  if (neutrals >= 3) return 'neutral';
+  return 'daily';
+}
+
+const TITLES = {
+  single: '심플 레오타드',
+  blackRose: '블랙 & 로즈',
+  pinkLayered: '핑크 레이어드',
+  mono: '모던 모노톤',
+  rosePoint: '로즈 포인트',
+  roseTone: '로즈 톤',
+  neutral: '뉴트럴 톤온톤',
+  daily: '차분한 데일리'
+};
+
+function lookTitle(combo) {
+  return TITLES[harmonyKey(combo)] || '차분한 데일리';
 }
 
 function harmonyLine(combo) {
-  const c = DATA.copy && DATA.copy.harmony ? DATA.copy.harmony : {};
-  const title = lookTitle(combo);
-  if (title === '블랙 & 로즈') return c.blackRose || '';
-  if (title === '핑크 레이어드') return c.pinkLayered || '';
-  if (title === '모던 모노톤') return c.mono || '';
-  if (title === '뉴트럴 톤온톤') return c.neutral || '';
-  if (title === '로즈 포인트') return c.rosePoint || '';
-  return c.daily || '';
+  const c = (DATA.copy && DATA.copy.harmony) || {};
+  return c[harmonyKey(combo)] || '';
 }
 
 function lookComment(combo) {
@@ -450,12 +461,11 @@ function lookComment(combo) {
   const leo = byId(combo.leotard), top = byId(combo.top), bot = byId(combo.bottom), ank = byId(combo.ankle);
   const parts = [harmonyLine(combo)];
   const bits = [];
-  if (leo && !top) bits.push(clause[leo.shape]);
   if (top) bits.push(clause[top.shape]);
   if (bot) bits.push(clause[bot.shape]);
+  if (!top && !bot && leo) bits.push(clause[leo.shape]);
   const kept = bits.filter(Boolean).slice(0, 2);
   if (kept.length) parts.push(kept.join(' '));
-  if (!top && leo && !bot) parts.push('워머나 하의 없이 레오타드 라인만 그대로 살렸어요.');
   if (ank) parts.push(`발목은 ${ank.colorName} 앵클워머로 마무리했어요.`);
   return parts.filter(Boolean).join(' ');
 }
@@ -479,7 +489,10 @@ function allCombos() {
 }
 
 function recommendPool(exclude) {
-  const scored = allCombos().map((c) => ({ combo: c, score: scoreCombo(c) }));
+  // 추천은 하의까지 갖춘 '완성된 코디' 중에서 고른다
+  const all = allCombos();
+  const full = all.filter((c) => c.bottom);
+  const scored = (full.length ? full : all).map((c) => ({ combo: c, score: scoreCombo(c) }));
   scored.sort((a, b) => b.score - a.score);
   const top = scored.slice(0, Math.min(18, scored.length));
   const key = (c) => [c.leotard, c.top, c.bottom, c.ankle].join('|');
@@ -648,6 +661,7 @@ function renderLog() {
 }
 
 function renderAll() {
+  $('#mastheadSub').textContent = `보유한 ${state.items.length}개 아이템으로 오늘의 코디를 골라 보세요`;
   renderStage(state.combo);
   renderPickers();
   renderLookbook();
@@ -800,7 +814,7 @@ function addItem(ev) {
   $('#addColorName').value = '';
   $('#addForm').hidden = true;
   renderAll();
-  toast(`'${name}'을(를) 옷장에 담았어요`);
+  toast(`'${name}' 옷장에 추가했어요`);
 }
 
 /* ---------------- 이벤트 연결 ---------------- */
@@ -856,6 +870,10 @@ function bind() {
       state.custom = state.custom.filter((x) => x.id !== id);
       state.items = DATA.items.concat(state.custom);
       ['leotard', 'top', 'bottom', 'ankle'].forEach((c) => { if (state.combo[c] === id) state.combo[c] = null; });
+      if (!state.combo.leotard) {
+        const firstLeo = itemsOf('leotard')[0];
+        state.combo.leotard = firstLeo ? firstLeo.id : null;
+      }
       renderAll(); toast('옷장에서 지웠어요');
       return;
     }
@@ -865,7 +883,7 @@ function bind() {
       if (item) {
         setCombo({ [item.category]: item.id });
         switchTab('compose');
-        toast(`'${item.short || item.name}'을(를) 코디에 담았어요`);
+        toast(`'${item.short || item.name}' 코디에 담았어요`);
       }
       return;
     }
@@ -918,7 +936,6 @@ async function boot() {
   const start = saved && byId(saved.leotard) ? saved : fallback;
   state.combo = { leotard: start.leotard || null, top: start.top || null, bottom: start.bottom || null, ankle: start.ankle || null };
 
-  $('#mastheadSub').textContent = `보유한 ${state.items.length}개 아이템으로 오늘의 코디를 골라 보세요`;
   bind();
   renderSwatches();
   fillShapeSelect('leotard');
