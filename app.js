@@ -288,7 +288,7 @@ function figureSvg(combo, opts = {}) {
         </g>`);
     } else if (top.shape === 'slim-tee') {
       /* 슬림핏 크롭티: 소매를 먼저 깔고 몸판을 덮어 어깨-소매가 한 조각처럼 이어지고, 밑단은 물결 마감 */
-      const teeBody = 'M110,78 C 103,82 100,87 98,94 C 99,114 99,132 100,146 q5,6 10,0 q5,6 10,0 q5,6 10,0 q5,6 10,0 C 141,132 141,114 142,94 C 140,87 137,82 130,78 Q120,104 110,78 Z';
+      const teeBody = 'M110,78 C 103,82 100,87 98,94 C 99,114 99,132 100,146 q5,6 10,0 q5,6 10,0 q5,6 10,0 q5,6 10,0 C 141,132 141,114 142,94 C 140,87 137,82 130,78 Q120,97 110,78 Z';
       const teeLine = shade(topColor, -20);
       layers.push(`<g stroke="${topColor}" stroke-width="12.5" stroke-linecap="round" fill="none">
           <path d="M103.5,96.5 C 94.5,117 88.5,141 84.5,161 C 82.5,173 80.5,184 79.5,194"/>
@@ -303,8 +303,8 @@ function figureSvg(combo, opts = {}) {
           <path d="M118,100 C 117,120 117,138 119,150" stroke="#fff" stroke-opacity=".08" stroke-width="2.4" stroke-linecap="round" fill="none"/>
         </g>`);
       /* 넥라인 리브 */
-      layers.push(`<path d="M130,78 Q120,104 110,78" fill="none" stroke="${teeLine}" stroke-opacity=".5" stroke-width="2.1" stroke-linecap="round"/>`);
-      layers.push(`<path d="M128,81 Q120,100 112,81" fill="none" stroke="${shade(topColor, 14)}" stroke-opacity=".45" stroke-width=".9"/>`);
+      layers.push(`<path d="M130,78 Q120,97 110,78" fill="none" stroke="${teeLine}" stroke-opacity=".5" stroke-width="2.1" stroke-linecap="round"/>`);
+      layers.push(`<path d="M128,81 Q120,95 112,81" fill="none" stroke="${shade(topColor, 14)}" stroke-opacity=".45" stroke-width=".9"/>`);
       /* 물결 밑단 */
       layers.push(`<path d="M100,146 q5,6 10,0 q5,6 10,0 q5,6 10,0 q5,6 10,0" fill="none" stroke="${topColor}" stroke-width="3.4" stroke-linecap="round"/>`);
       layers.push(`<path d="M101,144 q4.6,5 9.2,0 q4.6,5 9.2,0 q4.6,5 9.2,0 q4.6,5 9.2,0" fill="none" stroke="${teeLine}" stroke-opacity=".3" stroke-width=".9"/>`);
