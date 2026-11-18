@@ -30,6 +30,19 @@ https://ogooooo.github.io/ballet/
 아이템과 즐겨찾기 · 착용 기록은 브라우저 `localStorage`(`ballet.v1.*`)에 저장되므로 기기마다
 따로 남습니다.
 
+## 배포
+
+GitHub Pages로 배포되어 있습니다: <https://ogooooo.github.io/ballet/>
+
+- Pages 배포 소스는 **`gh-pages` 브랜치**입니다. (`main` 브랜치는 작업용)
+- 수정한 뒤에는 두 브랜치를 함께 올려 주세요.
+
+```bash
+cd ballet
+git push origin main
+git push origin main:gh-pages
+```
+
 ## 로컬에서 열기
 
 ```bash
