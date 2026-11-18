@@ -352,12 +352,16 @@ function figureArt(c) {
     <filter id="${k}-blur" x="-200%" y="-300%" width="500%" height="700%"><feGaussianBlur stdDeviation="4"/></filter>
     <filter id="${k}-blur2" x="-200%" y="-200%" width="500%" height="500%"><feGaussianBlur stdDeviation="2.2"/></filter>
     <filter id="${k}-blur3" x="-200%" y="-200%" width="500%" height="500%"><feGaussianBlur stdDeviation="1.4"/></filter>
+    <radialGradient id="${k}-halo" gradientUnits="userSpaceOnUse" cx="120" cy="210" r="140">
+      <stop offset="0" stop-color="#F6E3DC" stop-opacity=".55"/><stop offset=".55" stop-color="#F8E9E2" stop-opacity=".28"/><stop offset="1" stop-color="#FBF1EB" stop-opacity="0"/>
+    </radialGradient>
     <pattern id="${k}-mesh" width="4.2" height="4.2" patternUnits="userSpaceOnUse">
       <circle cx="2.1" cy="2.1" r=".95" fill="#fff" fill-opacity=".55"/>
     </pattern>
   </defs>`;
 
-  return `<svg viewBox="0 0 240 470" role="img" aria-label="선택한 발레복을 입은 발레리나 일러스트" preserveAspectRatio="xMidYMid meet">${defs}${L.join('')}</svg>`;
+  const backdrop = `<ellipse cx="120" cy="230" rx="96" ry="212" fill="url(#${k}-halo)"/>`;
+  return `<svg viewBox="0 0 240 470" role="img" aria-label="선택한 발레복을 입은 발레리나 일러스트" preserveAspectRatio="xMidYMid meet">${defs}${backdrop}<g transform="translate(120 0) scale(1.06 1) translate(-120 0)">${L.join('')}</g></svg>`;
 }
 
 /* ── 상의 그리기 ── */
