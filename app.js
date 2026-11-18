@@ -286,6 +286,37 @@ function figureSvg(combo, opts = {}) {
       layers.push(`<g stroke="${shade(topColor, 16)}" stroke-width=".9" opacity=".5" fill="none">
           <path d="M95,110 C 91,132 88,156 85,178"/><path d="M145,110 C 149,132 152,156 155,178"/>
         </g>`);
+    } else if (top.shape === 'slim-tee') {
+      /* 슬림핏 티: 소매를 먼저 깔고 몸판을 그 위에 덮어 어깨-소매가 한 조각처럼 이어진다 */
+      const teeBody = 'M110,78 C 103,82 100,87 98,94 C 99,120 99,146 100,167 Q120,173 140,167 C 141,146 141,120 142,94 C 140,87 137,82 130,78 Q120,104 110,78 Z';
+      const teeLine = shade(topColor, -20);
+      layers.push(`<g stroke="${topColor}" stroke-width="13" stroke-linecap="round" fill="none">
+          <path d="M103,96 C 94,117 88,141 84,161 C 82,173 80,184 79,194"/>
+          <path d="M137,96 C 146,117 152,141 156,161 C 158,173 160,184 161,194"/>
+        </g>`);
+      layers.push(`<clipPath id="${k}-tee"><path d="${teeBody}"/></clipPath>`);
+      layers.push(`<path d="${teeBody}" fill="${topColor}"/>`);
+      layers.push(`<g clip-path="url(#${k}-tee)">
+          <rect x="92" y="74" width="56" height="104" fill="url(#${k}-shade)"/>
+          <path d="M107,96 C 106,124 106,150 108,172" stroke="#fff" stroke-opacity=".13" stroke-width="6" stroke-linecap="round" fill="none"/>
+          <path d="M133,96 C 134,124 134,150 132,172" stroke="${teeLine}" stroke-opacity=".16" stroke-width="6" stroke-linecap="round" fill="none"/>
+          <path d="M118,100 C 117,126 117,152 119,172" stroke="#fff" stroke-opacity=".08" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+          <path d="M104,118 Q103,142 104,166" stroke="${teeLine}" stroke-opacity=".16" stroke-width="1" fill="none"/>
+          <path d="M136,118 Q137,142 136,166" stroke="${teeLine}" stroke-opacity=".16" stroke-width="1" fill="none"/>
+        </g>`);
+      /* 넥라인 리브 */
+      layers.push(`<path d="M130,78 Q120,104 110,78" fill="none" stroke="${teeLine}" stroke-opacity=".5" stroke-width="2.1" stroke-linecap="round"/>`);
+      layers.push(`<path d="M128,80 Q120,101 112,80" fill="none" stroke="${shade(topColor, 14)}" stroke-opacity=".45" stroke-width=".9"/>`);
+      /* 밑단 */
+      layers.push(`<path d="M100,166 Q120,172 140,166" fill="none" stroke="${teeLine}" stroke-opacity=".35" stroke-width="1.2"/>`);
+      layers.push(`<path d="${teeBody}" fill="none" stroke="${teeLine}" stroke-opacity=".28" stroke-width="1"/>`);
+      /* 소매 커프스 · 주름 */
+      layers.push(`<g stroke="${teeLine}" stroke-width="1.3" opacity=".45" fill="none">
+          <path d="M73.5,187 Q78,192 83.5,190"/><path d="M166.5,187 Q162,192 156.5,190"/>
+        </g>`);
+      layers.push(`<g stroke="${shade(topColor, 16)}" stroke-width=".9" opacity=".4" fill="none">
+          <path d="M96,110 C 92,132 89,154 86,174"/><path d="M144,110 C 148,132 151,154 154,174"/>
+        </g>`);
     } else if (top.shape === 'bolero-short') {
       layers.push(`<g stroke="${topColor}" stroke-width="14" stroke-linecap="round" fill="none">
           <path d="${SLEEVE_SHORT.left}"/><path d="${SLEEVE_SHORT.right}"/>
