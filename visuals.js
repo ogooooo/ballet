@@ -647,10 +647,10 @@ function boardArt(p) {
   /* ── 카드 ── */
   const hasTop = !!top, hasBot = !!bot, hasAnk = !!ank;
 
-  const A = hasBot ? { x: 26, y: 42, w: 144, h: 168, rot: -3.0 } : { x: 34, y: 44, w: 150, h: 184, rot: -2.6 };
-  const B = { x: 180, y: 32, w: 112, h: 126, rot: 6.4 };
-  const C = { x: 96, y: 198, w: 158, h: 134, rot: -1.6 };
-  const D = hasBot ? { x: 20, y: 248, w: 74, h: 90, rot: 5.6 } : { x: 182, y: 252, w: 78, h: 94, rot: -5.0 };
+  const A = hasBot ? { x: 26, y: 40, w: 140, h: 160, rot: -3.0 } : { x: 34, y: 42, w: 146, h: 176, rot: -2.6 };
+  const B = { x: 178, y: 30, w: 110, h: 120, rot: 6.4 };
+  const C = { x: 94, y: 190, w: 152, h: 128, rot: -1.6 };
+  const D = hasBot ? { x: 18, y: 238, w: 72, h: 86, rot: 5.6 } : { x: 180, y: 242, w: 76, h: 90, rot: -5.0 };
 
   const layer = [];
   if (hasTop) layer.push({ z: 1, el: cardFrame(B.x, B.y, B.w, B.h, B.rot, (w, h) => topCardInner(top, w, h, k), { caption: capFor(top, 'TOP'), frame: 'polaroid' }) });
@@ -680,10 +680,10 @@ function boardArt(p) {
   const title = p.title || '오늘의 코디';
   const sub = fit((p.items || chosen.map((i) => i.short || i.name).join(' · ')), 38);
   const date = p.date || '';
-  const baseY = 352;
+  const baseY = 338;
   push(`<path d="M20,${baseY} L${W - 20},${baseY}" stroke="#AC8B77" stroke-opacity=".3" stroke-width=".6"/>`);
   push(`<text x="20" y="${baseY + 12}" font-family="'Cormorant Garamond', serif" font-size="5.6" letter-spacing="2" fill="#B08F80">TODAY'S LOOK</text>`);
-  push(`<text x="20" y="${baseY + 32}" font-family="'Noto Serif KR', 'Cormorant Garamond', serif" font-size="16" letter-spacing=".1" fill="#453630">${esc(title)}</text>`);
+  push(`<text x="20" y="${baseY + 32}" font-family="'Noto Serif KR', 'Cormorant Garamond', serif" font-size="16" letter-spacing=".1" fill="#3E302B">${esc(title)}</text>`);
   push(`<text x="20" y="${baseY + 46}" font-family="'Noto Serif KR', sans-serif" font-size="6.4" letter-spacing=".1" fill="#97826F">${esc(sub)}</text>`);
   if (date) push(`<text x="20" y="${baseY + 59}" font-family="'Cormorant Garamond', serif" font-size="5.8" letter-spacing="1.2" fill="#B49A8B">${esc(date)}</text>`);
 
@@ -700,7 +700,7 @@ function boardArt(p) {
 
   const defs = `<defs>
     <linearGradient id="b-paper" x1="0" y1="0" x2="0.55" y2="1">
-      <stop offset="0" stop-color="#FEFAF3"/><stop offset=".38" stop-color="#FAF1E6"/><stop offset=".72" stop-color="#F6EADD"/><stop offset="1" stop-color="#EFDFD1"/>
+      <stop offset="0" stop-color="#FEFAF3"/><stop offset=".38" stop-color="#FAF1E6"/><stop offset=".72" stop-color="#F6EADD"/><stop offset="1" stop-color="#EBD9C8"/>
     </linearGradient>
     <radialGradient id="b-light" gradientUnits="userSpaceOnUse" cx="140" cy="80" r="170">
       <stop offset="0" stop-color="#FFFEFB" stop-opacity=".95"/><stop offset=".5" stop-color="#FFF9F0" stop-opacity=".45"/><stop offset="1" stop-color="#FFF9F0" stop-opacity="0"/>
@@ -721,7 +721,7 @@ function boardArt(p) {
       <stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset=".45" stop-color="#fff" stop-opacity=".04"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
     </linearGradient>
     <filter id="b-card" x="-30%" y="-25%" width="160%" height="160%">
-      <feDropShadow dx="1.2" dy="5.2" stdDeviation="4.6" flood-color="#6A4B3A" flood-opacity=".26"/>
+      <feDropShadow dx="1.2" dy="5.2" stdDeviation="4.6" flood-color="#5A3B2A" flood-opacity=".32"/>
     </filter>
     <filter id="b-tone" x="-4%" y="-4%" width="108%" height="108%">
       <feColorMatrix type="matrix" values="1.010 0.020 0.008 0 0.004  0.012 1.005 0.006 0 0.003  0.006 0.018 0.982 0 0.002  0 0 0 1 0"/>
