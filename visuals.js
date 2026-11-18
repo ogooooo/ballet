@@ -650,7 +650,7 @@ function boardArt(p) {
   const A = hasBot ? { x: 26, y: 40, w: 140, h: 160, rot: -3.0 } : { x: 34, y: 42, w: 146, h: 176, rot: -2.6 };
   const B = { x: 178, y: 30, w: 110, h: 120, rot: 6.4 };
   const C = { x: 94, y: 190, w: 152, h: 128, rot: -1.6 };
-  const D = hasBot ? { x: 18, y: 238, w: 72, h: 86, rot: 5.6 } : { x: 180, y: 242, w: 76, h: 90, rot: -5.0 };
+  const D = hasBot ? { x: 248, y: 252, w: 72, h: 86, rot: -5.4 } : { x: 26, y: 300, w: 76, h: 90, rot: 4.4 };
 
   const layer = [];
   if (hasTop) layer.push({ z: 1, el: cardFrame(B.x, B.y, B.w, B.h, B.rot, (w, h) => topCardInner(top, w, h, k), { caption: capFor(top, 'TOP'), frame: 'polaroid' }) });
