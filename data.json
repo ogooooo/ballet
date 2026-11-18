@@ -125,7 +125,9 @@
       "colorName": "오트밀",
       "family": "neutral",
       "value": 79,
-      "note": "골반부터 부드럽게 떨어지는 13인치 스커트"
+      "note": "골반부터 부드럽게 떨어지는 13인치 스커트",
+      "image": "assets/bot-oatmeal.jpg",
+      "imageSrc": "https://majouet.com/product/13인치-slim-fit-wrap-skirt/352/"
     },
     {
       "id": "bot-pink-skirt",
